@@ -40,11 +40,11 @@ social:
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Martin Lescano
   #email: '' # change to your email address
-  links:
+  #links:
     # The first element serves as the copyright owner's link
     #- https://twitter.com/username # change to your twitter homepage
-    - https://github.com/mlescano # change to your github homepage
-    - https://www.linkedin.com/in/martinlescano/
+    #- https://github.com/mlescano # change to your github homepage
+    #linkedin_username: https://www.linkedin.com/in/martinlescano/
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
     
