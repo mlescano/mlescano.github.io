@@ -31,7 +31,7 @@ url: ""
 github:
   username: mlescano # change to your github username
 
-twitter: false
+#twitter: 
 #  username: twitter_username # change to your twitter username
 linkedin:
   links:
@@ -45,9 +45,10 @@ social:
     # The first element serves as the copyright owner's link
     #- https://twitter.com/username # change to your twitter homepage
     - https://github.com/mlescano # change to your github homepage
+    - https://www.linkedin.com/in/martinlescano/
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    - https://www.linkedin.com/in/martinlescano/
+    
 
 google_site_verification: # fill in to your verification string
 
