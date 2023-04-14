@@ -4376,5 +4376,5 @@ h1+.post-meta span+span::before {
 */
 
 html {
-  font-size: 1.8rem;  /* 16px; Cambia el valor 16 por el tamaño de letra que desees */
+  font-size: 20px;  /* 16px; Cambia el valor 16 por el tamaño de letra que desees */
 }
