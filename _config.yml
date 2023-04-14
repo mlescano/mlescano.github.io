@@ -26,16 +26,15 @@ description: >- # used by seo meta and the atom feed
   Here you will find some documentation about my work.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ""
+url: "https://github.com/mlescano"
 
 github:
   username: mlescano # change to your github username
-
+linkedin:
+  username: martinlescano
 #twitter: 
 #  username: twitter_username # change to your twitter username
-linkedin:
-  links:
-    - https://www.linkedin.com/in/martinlescano/
+
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
