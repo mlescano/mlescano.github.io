@@ -14,8 +14,8 @@ In a small company, which does not have the resources for an advanced infrastruc
 
 In the first instance I came across a service organization that was not very well sized. This was implemented by:
 
-- A VM with a central multipurpose server that offered DC/AD, DNS, DHCP, FILE SHARING, SQL SERVER, ERP, APPS services. Everything on Windows Server. And this can be very economical or take advantage of the resources within the same VM in a dynamic way, but these services were not independent from each other, so if any failed, the server had to be restarted, interrupting the rest of the services that had no problem.
-- This server had an outdated version of Windows Server, resulting in security and functionality issues.
+- A VM with a **CENTRAL MULTIPURPOSE SERVER** that offered DC/AD, DNS, DHCP, FILE SHARING, SQL SERVER, ERP, APPS services. Everything on Windows Server. And this can be very economical or take advantage of the resources within the same VM in a dynamic way, but these services were not independent from each other, so if any failed, the server had to be restarted, interrupting the rest of the services that had no problem.
+- This server had an **outdated version of Windows Server**, resulting in security and functionality issues.
 - There was also another file server in a separate VM, implemented in Linux and for this reason it was not regulated in AD.
 - The network security configuration was applied by the pfsense solution with a VM, which did not offer the granularity and functionality necessary for the company.
 - In addition, there were other VMs with specific applications that were wasting virtualized resources since most of them used one VM per service.
@@ -37,7 +37,7 @@ The greatest possible integrity must be safeguarded, so in its design there must
 ## TASKS
 To achieve these objectives, the following activities are carried out:
 - **RESTRUCTURING OF PHYSICAL SERVERS** (for *Resource Optimization*)
-- **SERVICE SEPARATION** (for *Independence of operation*)
+- **SERVICE ISOLATION** (for *Independence of operation*)
 - **REPLICAS OF VMs** (for *Good Availability*)
 - **CREATION of VM and DOCKER SERVERS** (for *Resource Optimization*)
 - **CREATION OF BACKUP SERVERS** (for *Data integrity*)
@@ -55,13 +55,14 @@ There are 3 small physical servers of different technologies. These servers are 
     - will be used with VMWARE ESXI virtualization as SRV2
 
 
-### SERVICE SEPARATION
+### SERVICE ISOLATION
 
-In order to obtain a better granularity of services, they were grouped according to the CIA model (Confidentiality, Integrity and Availability).
+In order to choose which devices offer certain services and to obtain a better isolation of them, they were grouped according to the CIA triad (Confidentiality, Integrity and Availability) and separated according the convenience as follows:
 
-The separation of services before and after is detailed below:
 
-![service-separation](/assets/img/posts/service-organization2.png)
+![service-isolation](/assets/img/posts/service-organization2.png)
+*The figure shows the isolation of services before and after.*
+
 
 Therefore, in terms of:
 
@@ -109,9 +110,9 @@ Through the Backup server, replicas of VMs are made to obtain a mirror on each s
 
 ![server-migration](/assets/img/posts/server-migration.png)
 
-The figure shows the change from a precarious structure (on the left) to a structure (right) with the advantages mentioned above
+The figure shows the change from a precarious structure (on the left) to a structure (right) with the advantages mentioned above.
 
-The distribution of the active MVs (in orange) and those that are turned off (in gray) is shown. These are replicas of the active ones and are arranged so that if a failure occurs, they can be manually activated. It doesn’t offer uninterrupted service or failover, but at least downtime is as short as possible.An attempt has been made to separate the services as best as possible given that there were only 2 servers with the capacity for virtualization and a low-resource server (Veeam B&R) to make backup copies and replicate the virtual machines. 
+The distribution of the active VMs (in orange) and those that are turned off (in gray) is shown. These are replicas of the active ones and are arranged so that if a failure occurs, they can be manually activated. It doesn’t offer uninterrupted service or failover, but at least downtime is as short as possible.An attempt has been made to separate the services as best as possible given that there were only 2 servers with the capacity for virtualization and a low-resource server (Veeam B&R) to make backup copies and replicate the virtual machines. 
 
 
 ### CREATION OF DOCKER SERVERS
