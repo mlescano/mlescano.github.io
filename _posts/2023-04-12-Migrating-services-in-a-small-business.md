@@ -6,10 +6,7 @@ categories: infrastructure
 tags: vmware esxi virtual-machine windows-server sysadmin hardware
 image:
   path: /assets/img/headers/migrating-servers.png
-  crop: '4:1'
-    # media_crop:
-    #   tablet: '4:1'
-    #   mobile: '4:1'
+  height: 20px
 ---
 
 In a small company, which does not have the resources for an advanced infrastructure and can only have an On-Premise installation, it is possible to obtain a good architecture within the limitations offered by the resources available to obtain a good implementation.
