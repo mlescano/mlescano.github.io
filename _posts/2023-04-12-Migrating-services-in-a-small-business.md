@@ -26,4 +26,4 @@ The figure shows the change from a precarious structure (on the left) to a struc
 
 The distribution of the active MVs (in orange) and those that are turned off (in gray) is shown. These are replicas of the active ones and are arranged so that if a failure occurs, they can be manually activated. It doesn’t offer uninterrupted service or failover, but at least downtime is as short as possible.An attempt has been made to separate the services as best as possible given that there were only 2 servers with the capacity for virtualization and a low-resource server (Veeam B&R) to make backup copies and replicate the virtual machines. The separation of services before and after is detailed below:
 
-![service-separation](/assets/img/posts/service-separation.png)
+![service-separation](/assets/img/posts/service-organization.png)
