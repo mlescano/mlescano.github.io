@@ -10,7 +10,7 @@ image:
 
 In a small company, which does not have the resources for an advanced infrastructure and can only have an On-Premise installation, it is possible to obtain a good architecture within the limitations offered by the resources available to obtain a good implementation.
 
-# NEED OF RESTRUCTURATION OF SERVICES
+## NEED OF RESTRUCTURATION OF SERVICES
 
 In the first instance I came across a service organization that was not very well sized. This was implemented by:
 
