@@ -23,6 +23,7 @@ In the first instance I came across a service organization that was not very wel
 For these reasons, it was decided to migrate to a more complex and robust architecture that does not waste so many resources, as well as offering a more granular separation of services.
 
 # GOALS
+
 Then, the objectives to be met to solve these inconveniences are listed:
 - *INDEPENDENCE OF OPERATION*:
 The services must be able to be managed independently so any situation does not affect the other services
@@ -40,7 +41,7 @@ To achieve these objectives, the following activities are carried out:
 - CREATION of VM and DOCKER SERVERS (for *Resource Optimization*)
 - CREATION OF BACKUP SERVERS (for *Data integrity*)
 
------------------------
+
 ## RESTRUCTURING OF PHYSICAL SERVERS
 There are 3 small physical servers of different technologies. These servers are not new or powerful, but since it is the only existing hardware, they are modified to obtain the maximum performance from them:
 1. HP PROLIANT ML150 G3 (2 logical cores, 4GB RAM)
@@ -52,7 +53,7 @@ There are 3 small physical servers of different technologies. These servers are 
 3. IBM SYSTEM X3550 M4 (12 logical cores, 32GB RAM)
     - will be used with VMWARE ESXI virtualization as SRV2
 
------------------------
+
 ## SERVICE SEPARATION
 
 In order to obtain a better granularity of services, they were grouped according to the CIA model (Confidentiality, Integrity and Availability).
@@ -98,7 +99,7 @@ Therefore, in terms of:
 
 More about specific steps I did to ensure data integrity and good availability, please read here.
 
------------------------
+
 ## REPLICAS OF VMs
 Through the Backup server, replicas of VMs are made to obtain a mirror on each server, thus being able to opt for the mirror replica in case of failure of any.
 
@@ -111,7 +112,7 @@ The figure shows the change from a precarious structure (on the left) to a struc
 
 The distribution of the active MVs (in orange) and those that are turned off (in gray) is shown. These are replicas of the active ones and are arranged so that if a failure occurs, they can be manually activated. It doesn’t offer uninterrupted service or failover, but at least downtime is as short as possible.An attempt has been made to separate the services as best as possible given that there were only 2 servers with the capacity for virtualization and a low-resource server (Veeam B&R) to make backup copies and replicate the virtual machines. 
 
------------------------
+
 ## CREATION OF DOCKER SERVERS
 A VM with Linux and Docker for container management is created to create the services that cover:
 - COMMUNICATION
@@ -120,7 +121,7 @@ A VM with Linux and Docker for container management is created to create the ser
 - INTRANET
 - BACKUP
 
------------------------
+
 ## LIMITATIONS:
 - This structure does not offer FAILOVER for the VMs, but as described, it only has replicas that can be turned on when required.
 - This structure does not have a DR system, that is to say that in the event of a disaster it can only offer replacement of VMs from the backup, this implies that it depends on the moment in which the SNAPSHOT was obtained and depending on the severity of the disaster and the frequency of exchange of the Offline copy, the last operational state of the same will be obtained.
