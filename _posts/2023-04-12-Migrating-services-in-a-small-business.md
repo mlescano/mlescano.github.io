@@ -34,7 +34,7 @@ Services should consume only the resources they need and release the rest so tha
 - **DATA INTEGRITY**:
 The greatest possible integrity must be safeguarded, so in its design there must be a good backup solution, both in technology and strategy.
 
-### TASKS
+## TASKS
 To achieve these objectives, the following activities are carried out:
 - **RESTRUCTURING OF PHYSICAL SERVERS** (for *Resource Optimization*)
 - **SERVICE SEPARATION** (for *Independence of operation*)
@@ -43,7 +43,7 @@ To achieve these objectives, the following activities are carried out:
 - **CREATION OF BACKUP SERVERS** (for *Data integrity*)
 
 
-## RESTRUCTURING OF PHYSICAL SERVERS
+### RESTRUCTURING OF PHYSICAL SERVERS
 There are 3 small physical servers of different technologies. These servers are not new or powerful, but since it is the only existing hardware, they are modified to obtain the maximum performance from them:
 1. **HP PROLIANT ML150 G3** (2 logical cores, 4GB RAM)
     - It will be used with a single application as a BACKUP server with VEEAM B&R
@@ -55,7 +55,7 @@ There are 3 small physical servers of different technologies. These servers are 
     - will be used with VMWARE ESXI virtualization as SRV2
 
 
-## SERVICE SEPARATION
+### SERVICE SEPARATION
 
 In order to obtain a better granularity of services, they were grouped according to the CIA model (Confidentiality, Integrity and Availability).
 
@@ -101,7 +101,7 @@ Therefore, in terms of:
 More about specific steps I did to ensure data integrity and good availability, please read here.
 
 
-## REPLICAS OF VMs
+### REPLICAS OF VMs
 Through the Backup server, replicas of VMs are made to obtain a mirror on each server, thus being able to opt for the mirror replica in case of failure of any.
 
 
@@ -114,7 +114,7 @@ The figure shows the change from a precarious structure (on the left) to a struc
 The distribution of the active MVs (in orange) and those that are turned off (in gray) is shown. These are replicas of the active ones and are arranged so that if a failure occurs, they can be manually activated. It doesn’t offer uninterrupted service or failover, but at least downtime is as short as possible.An attempt has been made to separate the services as best as possible given that there were only 2 servers with the capacity for virtualization and a low-resource server (Veeam B&R) to make backup copies and replicate the virtual machines. 
 
 
-## CREATION OF DOCKER SERVERS
+### CREATION OF DOCKER SERVERS
 A VM with Linux and Docker for container management is created to create the services that cover:
 - COMMUNICATION
 - DOCKER ADMINISTRATION
