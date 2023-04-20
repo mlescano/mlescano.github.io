@@ -14,7 +14,7 @@ In a small company, which does not have the resources for an advanced infrastruc
 
 In the first instance I came across a service organization that was not very well sized. This was implemented by:
 
-- A VM with a central multipurpose server that offered DC/AD, DNS, DHCP, FILE SHARING, SQL SERVER, ERP, APPS services. Everything on Windows Server. And this can be very economical or take advantage of the resources within the same VM in a dynamic way, but these services were not independent from each other, so if any failed, the server had to be restarted, interrupting the rest of the services that had no problem. some.
+- A VM with a central multipurpose server that offered DC/AD, DNS, DHCP, FILE SHARING, SQL SERVER, ERP, APPS services. Everything on Windows Server. And this can be very economical or take advantage of the resources within the same VM in a dynamic way, but these services were not independent from each other, so if any failed, the server had to be restarted, interrupting the rest of the services that had no problem.
 - This server had an outdated version of Windows Server, resulting in security and functionality issues.
 - There was also another file server in a separate VM, implemented in Linux and for this reason it was not regulated in AD.
 - The network security configuration was applied by the pfsense solution with a VM, which did not offer the granularity and functionality necessary for the company.
@@ -123,9 +123,9 @@ A VM with Linux and Docker for container management is created to create the ser
 - This structure does not have a DR system, that is to say that in the event of a disaster it can only offer replacement of VMs from the backup, this implies that it depends on the moment in which the SNAPSHOT was obtained and depending on the severity of the disaster and the frequency of exchange of the Offline copy, the last operational state of the same will be obtained.
 - This structure does not have redundancy of the physical devices, due to the low budget that the company manages.
 
-Consider the audience: It's not entirely clear who your intended audience is for this document - are you writing for technical colleagues, management, or both? Depending on the audience, you may need to adjust your level of technical detail and explain concepts more or less thoroughly.
+<!-- Consider the audience: It's not entirely clear who your intended audience is for this document - are you writing for technical colleagues, management, or both? Depending on the audience, you may need to adjust your level of technical detail and explain concepts more or less thoroughly.
 
 Review and revise: Once you've added more detail and context, take some time to review and revise your document. Make sure that it flows logically, that key points are clearly articulated, and that there are no typos or errors.
-
+ -->
 
 
