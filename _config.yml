@@ -18,7 +18,7 @@ timezone: America/Argentina/Buenos_Aires
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Martin Lescano Portfolio # the main title
+title: Martin Lescano´s Portfolio # the main title
 
 tagline: A Doc site for my goals # it will display as the sub-title
 
@@ -27,7 +27,8 @@ description: >- # used by seo meta and the atom feed
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 #url: "https://github.com/mlescano"
-url: "https://mlescano.github.io"
+#url: "https://mlescano.github.io"
+url: "https://martinlescano.com.ar"
 
 github:
   username: mlescano # change to your github username

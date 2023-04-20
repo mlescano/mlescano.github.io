@@ -39,6 +39,7 @@ To achieve these objectives, the following activities are carried out:
 - REPLICAS OF VMs (for *Good Availability*)
 - CREATION of VM and DOCKER SERVERS (for *Resource Optimization*)
 - CREATION OF BACKUP SERVERS (for *Data integrity*)
+
 -----------------------
 ## RESTRUCTURING OF PHYSICAL SERVERS
 There are 3 small physical servers of different technologies. These servers are not new or powerful, but since it is the only existing hardware, they are modified to obtain the maximum performance from them:
@@ -47,7 +48,7 @@ There are 3 small physical servers of different technologies. These servers are 
 
 2. HP PROLIANT DL160 G10 (6 logical cores, 32GB RAM)
     - will be used with VMWARE ESXI virtualization as SRV1
-    
+
 3. IBM SYSTEM X3550 M4 (12 logical cores, 32GB RAM)
     - will be used with VMWARE ESXI virtualization as SRV2
 
