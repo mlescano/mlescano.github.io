@@ -22,35 +22,36 @@ In the first instance I came across a service organization that was not very wel
 
 For these reasons, it was decided to migrate to a more complex and robust architecture that does not waste so many resources, as well as offering a more granular separation of services.
 
-# GOALS
+## GOALS
 
 Then, the objectives to be met to solve these inconveniences are listed:
-- *INDEPENDENCE OF OPERATION*:
+- **INDEPENDENCE OF OPERATION**:
 The services must be able to be managed independently so any situation does not affect the other services
-- *GOOD AVAILABILITY*:
+- **GOOD AVAILABILITY**:
 The services must be supported with some redundancy, to offer, to the extent possible, a service that is as highly available.
-- *RESOURCE OPTIMIZATION*:
+- **RESOURCE OPTIMIZATION**:
 Services should consume only the resources they need and release the rest so that they are available to other services.
-- *DATA INTEGRITY*:
+- **DATA INTEGRITY**:
 The greatest possible integrity must be safeguarded, so in its design there must be a good backup solution, both in technology and strategy.
 
+### TASKS
 To achieve these objectives, the following activities are carried out:
-- RESTRUCTURING OF PHYSICAL SERVERS (for *Resource Optimization*)
-- SERVICE SEPARATION (for *Independence of operation*)
-- REPLICAS OF VMs (for *Good Availability*)
-- CREATION of VM and DOCKER SERVERS (for *Resource Optimization*)
-- CREATION OF BACKUP SERVERS (for *Data integrity*)
+- **RESTRUCTURING OF PHYSICAL SERVERS** (for *Resource Optimization*)
+- **SERVICE SEPARATION** (for *Independence of operation*)
+- **REPLICAS OF VMs** (for *Good Availability*)
+- **CREATION of VM and DOCKER SERVERS** (for *Resource Optimization*)
+- **CREATION OF BACKUP SERVERS** (for *Data integrity*)
 
 
 ## RESTRUCTURING OF PHYSICAL SERVERS
 There are 3 small physical servers of different technologies. These servers are not new or powerful, but since it is the only existing hardware, they are modified to obtain the maximum performance from them:
-1. HP PROLIANT ML150 G3 (2 logical cores, 4GB RAM)
+1. **HP PROLIANT ML150 G3** (2 logical cores, 4GB RAM)
     - It will be used with a single application as a BACKUP server with VEEAM B&R
 
-2. HP PROLIANT DL160 G10 (6 logical cores, 32GB RAM)
+2. **HP PROLIANT DL160 G10** (6 logical cores, 32GB RAM)
     - will be used with VMWARE ESXI virtualization as SRV1
 
-3. IBM SYSTEM X3550 M4 (12 logical cores, 32GB RAM)
+3. **IBM SYSTEM X3550 M4** (12 logical cores, 32GB RAM)
     - will be used with VMWARE ESXI virtualization as SRV2
 
 
