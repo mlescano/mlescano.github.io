@@ -8,7 +8,7 @@ image:
   path: /assets/img/headers/migrating-servers.png
 ---
 
-In a small company, which does not have the resources for an advanced infrastructure and can only have an On-Premise installation is possible to obtain a good architecture within the limitations that the installation offers to obtain a good implementation. 
+In a small company, which does not have the resources for an advanced infrastructure and can only have an On-Premise installation, it is possible to obtain a good architecture within the limitations offered by the resources available to obtain a good implementation.
 
 # NEED OF RESTRUCTURATION OF SERVICES
 
@@ -24,13 +24,13 @@ For these reasons, it was decided to migrate to a more complex and robust archit
 
 # GOALS
 Then, the objectives to be met to solve these inconveniences are listed:
-- *Independence of operation*:
+- *INDEPENDENCE OF OPERATION*:
 The services must be able to be managed independently so any situation does not affect the other services
-- *Good Availability*:
+- *GOOD AVAILABILITY*:
 The services must be supported with some redundancy, to offer, to the extent possible, a service that is as highly available.
-- *Resource Optimization*:
+- *RESOURCE OPTIMIZATION*:
 Services should consume only the resources they need and release the rest so that they are available to other services.
-- *Data integrity*:
+- *DATA INTEGRITY*:
 The greatest possible integrity must be safeguarded, so in its design there must be a good backup solution, both in technology and strategy.
 
 To achieve these objectives, the following activities are carried out:
@@ -44,8 +44,10 @@ To achieve these objectives, the following activities are carried out:
 There are 3 small physical servers of different technologies. These servers are not new or powerful, but since it is the only existing hardware, they are modified to obtain the maximum performance from them:
 1. HP PROLIANT ML150 G3 (2 logical cores, 4GB RAM)
     - It will be used with a single application as a BACKUP server with VEEAM B&R
+
 2. HP PROLIANT DL160 G10 (6 logical cores, 32GB RAM)
     - will be used with VMWARE ESXI virtualization as SRV1
+    
 3. IBM SYSTEM X3550 M4 (12 logical cores, 32GB RAM)
     - will be used with VMWARE ESXI virtualization as SRV2
 
