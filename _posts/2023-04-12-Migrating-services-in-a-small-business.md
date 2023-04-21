@@ -126,8 +126,8 @@ A VM with Linux and Docker for container management is created to create the ser
 
 
 ## LIMITATIONS:
-- This structure does not offer FAILOVER for the VMs, but as described, it only has replicas that can be turned on when required.
-- This structure does not have a DR system, that is to say that in the event of a disaster it can only offer replacement of VMs from the backup, this implies that it depends on the moment in which the SNAPSHOT was obtained and depending on the severity of the disaster and the frequency of exchange of the Offline copy, the last operational state of the same will be obtained.
+- This structure does not offer FAILOVER for the VMs, but as described, it only has replicas that can be activated when necessary.
+- This structure does not have a DR system, that is, in the event of a disaster it can only offer replacement of VMs from the backup, this implies that it depends on the moment in which the SNAPSHOT was obtained and depending on the severity of the disaster and the frequency of exchange of copies Offline, the last operating status of the copies will be obtained.
 - This structure does not have redundancy of the physical devices, due to the low budget that the company manages.
 
 <!-- Consider the audience: It's not entirely clear who your intended audience is for this document - are you writing for technical colleagues, management, or both? Depending on the audience, you may need to adjust your level of technical detail and explain concepts more or less thoroughly.
