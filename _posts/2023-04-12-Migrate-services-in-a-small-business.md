@@ -14,7 +14,7 @@ In a small company, which does not have the resources for an advanced infrastruc
 
 At first, I ran into an inefficient service organization. What led me to make changes was:
 
-- A VM with a **CENTRAL MULTIPURPOSE SERVER** that offered DC/AD, DNS, DHCP, FILE SHARING, SQL SERVER, ERP, APPS services. Everything on the same Windows Server installation. This can be very economical or take advantage of the resources within the same VM in a dynamic way due to Windows resource management, but these services were not independent from each other, so if any failed, in the worst case, the server had to be restarted, interrupting the rest of the services that had no problem.
+- A VM with a **MULTIPURPOSE CENTRAL SERVER** that offered DC/AD, DNS, DHCP, FILE SHARING, SQL SERVER, ERP, APPS services. Everything on the same Windows Server installation. This can be very economical or take advantage of the resources within the same VM in a dynamic way due to Windows resource management, but these services were not independent from each other, so if any failed, in the worst case, the server had to be restarted, interrupting the rest of the services that had no problem.
 - This server had an **outdated version of Windows Server**, resulting in security and functionality issues.
 - There was also another file server in a separate VM, implemented in Linux and for this reason it was not regulated in AD.
 - The network security configuration was applied by the pfsense solution with a VM, which did not offer the granularity and functionality necessary for the company.
