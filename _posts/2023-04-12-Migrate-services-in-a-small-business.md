@@ -95,7 +95,7 @@ Therefore, in terms of:
   - *IT SERVICE*:
     - The ITSM service is implemented with GLPI for the management of ASSET MANAGEMENT, HELP and SERVICE DESK also through DOCKER.
   - *SHARING*:
-    - The SMB FILE SHARING service is implemented on a Windows Server VM for its convenience of functionality and compatibility with the Microsoft ecosystem
+    - The SMB FILE SHARING service is implemented on a Windows Server VM for its convenience of functionality and compatibility with the Microsoft environment.
   - *WORK SERVICES*: the following services are described:
     - REMOTE APP: it is implemented in a VM with Windows Server, given its nature and needs of the different departments of the company.
     - SQL, ERP: it is implemented in a VM with Windows Server, given its nature and needs of the different departments of the company.
