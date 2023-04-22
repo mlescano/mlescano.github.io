@@ -56,6 +56,7 @@ There are 3 small physical servers of different technologies. These servers are 
 3. **IBM SYSTEM X3550 M4** (12 logical cores, 32GB RAM)
     - This server, on the other hand, is better equipped, but it has been in use for a few years. Will be used with VMWARE ESXI virtualization as SRV1
 
+The last two servers will be used as replication mirrors. This is described below.
 
 ### SERVICE ISOLATION
 
