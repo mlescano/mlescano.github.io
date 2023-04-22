@@ -84,7 +84,7 @@ Therefore, in terms of:
   - *CONNECTIVITY*:
     - DNS, DHCP, NAT: a physical device was used as a Router for its capacity, speed and convenience.
     - TRANSPORT: physical device such as Switch was used for its capacity, speed and convenience.
-    - WIFI-CTRL: a UNIFI DOCKER container was used due to the need to use resources and convenience.
+    - WIFI-CONTROLLER: a UNIFI DOCKER container was used due to the need to use resources and convenience.
   - *REDUNDANCY*:
     - ISP FAILOVER: a physical device was used as a Router for the FAILOVER service with two ISPs to offer REDUNDANCY of service, due to its capacity, speed and convenience.
     - VM REPLICAS: VEEAM replicates VMs between physical servers to obtain a kind of non-automatic FAILOVER, which allows VMs to be set up in a short time and to obtain good availability despite the few available resources.
