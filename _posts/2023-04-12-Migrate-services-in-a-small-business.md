@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Migrating services in a small business"
+title:  "Migrate services in a small business"
 date: 2023-04-12 10:00:00 -0500
 categories: infrastructure
 tags: vmware esxi virtual-machine windows-server sysadmin hardware
@@ -10,7 +10,7 @@ image:
 
 In a small company, which does not have the resources for an advanced infrastructure and can only have an On-Premise installation, it is possible to obtain a good architecture within the limitations offered by the resources available to obtain a good implementation.
 
-## NEED OF RESTRUCTURATION OF SERVICES
+## WHY RESTRUCTURATION OF SERVICES?
 
 In the first instance I came across a service organization that was not very well sized. This was implemented by:
 
@@ -22,7 +22,7 @@ In the first instance I came across a service organization that was not very wel
 
 For these reasons, it was decided to migrate to a more complex and robust architecture that does not waste so many resources, as well as offering a more granular separation of services.
 
-## GOALS
+## OBJECTIVES
 
 Then, the objectives to be met to solve these inconveniences are listed:
 - **INDEPENDENCE OF OPERATION**:
