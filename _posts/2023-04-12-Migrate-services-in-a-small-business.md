@@ -10,11 +10,11 @@ image:
 
 In a small company, which does not have the resources for an advanced infrastructure and can only have an On-Premise installation, it is possible to obtain a good architecture within the limitations offered by the resources available to obtain a good implementation.
 
-## WHY RESTRUCTURATION OF SERVICES?
+## WHY DID I DECIDE TO RESTRUCTURE THE SERVICES?
 
-In the first instance I came across a service organization that was not very well sized. This was implemented by:
+At first, I ran into an inefficient service organization. What led me to make changes was:
 
-- A VM with a **CENTRAL MULTIPURPOSE SERVER** that offered DC/AD, DNS, DHCP, FILE SHARING, SQL SERVER, ERP, APPS services. Everything on Windows Server. And this can be very economical or take advantage of the resources within the same VM in a dynamic way, but these services were not independent from each other, so if any failed, the server had to be restarted, interrupting the rest of the services that had no problem.
+- A VM with a **CENTRAL MULTIPURPOSE SERVER** that offered DC/AD, DNS, DHCP, FILE SHARING, SQL SERVER, ERP, APPS services. Everything on the same Windows Server installation. This can be very economical or take advantage of the resources within the same VM in a dynamic way due to Windows resource management, but these services were not independent from each other, so if any failed, in the worst case, the server had to be restarted, interrupting the rest of the services that had no problem.
 - This server had an **outdated version of Windows Server**, resulting in security and functionality issues.
 - There was also another file server in a separate VM, implemented in Linux and for this reason it was not regulated in AD.
 - The network security configuration was applied by the pfsense solution with a VM, which did not offer the granularity and functionality necessary for the company.
@@ -22,13 +22,15 @@ In the first instance I came across a service organization that was not very wel
 
 For these reasons, it was decided to migrate to a more complex and robust architecture that does not waste so many resources, as well as offering a more granular separation of services.
 
+It is worth mentioning that all the changes were made according to the resources I had available.
+
 ## OBJECTIVES
 
 Then, the objectives to be met to solve these inconveniences are listed:
 - **INDEPENDENCE OF OPERATION**:
 The services must be able to be managed independently so any situation does not affect the other services
 - **GOOD AVAILABILITY**:
-The services must be supported with some redundancy, to offer, to the extent possible, a service that is as highly available.
+The services must be supported with some redundancy, in order to offer a service with the highest possible availability.
 - **RESOURCE OPTIMIZATION**:
 Services should consume only the resources they need and release the rest so that they are available to other services.
 - **DATA INTEGRITY**:
@@ -46,13 +48,13 @@ To achieve these objectives, the following activities are carried out:
 ### RESTRUCTURING OF PHYSICAL SERVERS
 There are 3 small physical servers of different technologies. These servers are not new or powerful, but since it is the only existing hardware, they are modified to obtain the maximum performance from them:
 1. **HP PROLIANT ML150 G3** (2 logical cores, 4GB RAM)
-    - It will be used with a single application as a BACKUP server with VEEAM B&R
+    - This is the worst equipped server, so I decided not to virtualize it and instead install a Windows Server with a single application (VEEAM B&R) to work as a BACKUP server
 
 2. **HP PROLIANT DL160 G10** (6 logical cores, 32GB RAM)
-    - will be used with VMWARE ESXI virtualization as SRV1
+    - This is the newest server available, but poorly sized. Will be used with VMWARE ESXI virtualization as SRV1
 
 3. **IBM SYSTEM X3550 M4** (12 logical cores, 32GB RAM)
-    - will be used with VMWARE ESXI virtualization as SRV2
+    - This server, on the other hand, is better equipped, but it has been in use for a few years. Will be used with VMWARE ESXI virtualization as SRV1
 
 
 ### SERVICE ISOLATION
@@ -87,13 +89,13 @@ Therefore, in terms of:
     - VM REPLICAS: VEEAM replicates VMs between physical servers to obtain a kind of non-automatic FAILOVER, which allows VMs to be set up in a short time and to obtain good availability despite the few available resources.
     - DOCKER SWARM: this technology is used to offer uninterrupted container service. This is already available in DOCKER and offers a good service.
 
-  - *COMMUNICATION*: offered by
-    - CHAT with OPENFIRE for internal communications with DOCKER
-  - *IT SERVICE*: offered by
-    - ITSM with GLPI for the management of ASSET MANAGEMENT, HELP and SERVICE DESK
-  - *SHARING*: offered by
-    - SMB FILE SHARING on a Windows Server VM for its convenience of functionality and compatibility with the Microsoft ecosystem
-  - *WORK SERVICES*: offered by
+  - *COMMUNICATION*:
+    - The CHAT service is implemented with OPENFIRE for internal communications through DOCKER.
+  - *IT SERVICE*:
+    - The ITSM service is implemented with GLPI for the management of ASSET MANAGEMENT, HELP and SERVICE DESK also through DOCKER.
+  - *SHARING*:
+    - The SMB FILE SHARING service is implemented on a Windows Server VM for its convenience of functionality and compatibility with the Microsoft ecosystem
+  - *WORK SERVICES*: the following services are described:
     - REMOTE APP: it is implemented in a VM with Windows Server, given its nature and needs of the different departments of the company.
     - SQL, ERP: it is implemented in a VM with Windows Server, given its nature and needs of the different departments of the company.
     - INTRANET: it is implemented in DOCKER and consists of a Web server with the development of a page that offers required services.
@@ -103,7 +105,7 @@ More about specific steps I did to ensure data integrity and good availability, 
 
 
 ### REPLICAS OF VMs
-Through the Backup server, replicas of VMs are made to obtain a mirror on each server, thus being able to opt for the mirror replica in case of failure of any.
+Through the Backup server, replicas of VMs are made to obtain a mirror on each server, thus being able to opt for the mirror replica in case of failure of one. This is possible with the use of VEEAM B&R
 
 
 - The services was grouped according to their type and distributed on different devices to obtain the best independence of operation:
@@ -125,9 +127,16 @@ A VM with Linux and Docker for container management is created to create the ser
 
 
 ## LIMITATIONS:
-- This structure does not offer FAILOVER for the VMs, but as described, it only has replicas that can be activated when necessary.
-- This structure does not have a DR system, that is, in the event of a disaster it can only offer replacement of VMs from the backup, this implies that it depends on the moment in which the SNAPSHOT was obtained and depending on the severity of the disaster and the frequency of exchange of copies Offline, the last operating status of the copies will be obtained.
-- This structure does not have redundancy of the physical devices, due to the low budget that the company manages.
+- This structure does not offer FAILOVER for the VMs, but as described, it only has replicas that can be activated when necessary. This allows for as little downtime as possible.
+- This structure does not have a DR system, meaning that if a disaster occurs it can only offer replacement of backup VMs, this implies that the last operating state of the copies will be obtained depending on:
+  - Time when the last SNAPSHOT was obtained
+  - The severity of the disaster
+  - The frequency of exchanging copies Offline
+  
+  Consequently, as much information as possible can be recovered in the event of a disaster.
+  In addition, the time to restore the operation of the systems is defined by the recovery time of the backups and the eventual adjustments that must be made in the environment of services and clients.
+
+- This structure does not have redundancy of the physical devices, due to the low budget that the company manages. This can lead to some downtime in case of breakage and depending on the device in question, it will be the duration of this time.
 
 <!-- Consider the audience: It's not entirely clear who your intended audience is for this document - are you writing for technical colleagues, management, or both? Depending on the audience, you may need to adjust your level of technical detail and explain concepts more or less thoroughly.
 

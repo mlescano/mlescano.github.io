@@ -20,7 +20,7 @@ timezone: America/Argentina/Buenos_Aires
 
 title: Martin Lescano Portfolio # the main title
 
-tagline: A Doc site for my goals # it will display as the sub-title
+tagline: A documentation site for my achievements # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   Here you will find some documentation about my work.
