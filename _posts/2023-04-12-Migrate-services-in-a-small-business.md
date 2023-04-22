@@ -69,12 +69,12 @@ In order to choose which devices offer certain services and to obtain a better i
 
 Therefore, in terms of:
 
-**CONFIDENTIALITY**: the following services were provided for being in charge of offering security and protection of information as follows:
+**CONFIDENTIALITY**: The following services are configured to offer security and protection of information as follows:
   - ROUTING, PROXY, VPN, VLAN: physical devices such as Router and Switches were used, due to their capacity, speed and convenience
-  - NAP, AD, DC, LDAP: Windows Server was used in VM due to its association with the Microsoft ecosystem.
-  - Reverse-PROXY: it is implemented in DOCKER with TRAEFIK due to its ease of use and allows to protect internal services through SSL certificates.
+  - NAP, AD, DC, LDAP: for these services Windows Server is deployed in a VM due to its association with the Microsoft environment.
+  - Reverse-PROXY: is implemented with TRAEFIK through DOCKER due to its ease of use and allows to protect internal services through SSL certificates.
 
-**INTEGRITY**: the following services were provided for being in charge of offering protection in terms of backing up information in case of loss, as follows:
+**INTEGRITY**: the following services were provided to offer protection in terms of backing up information in case of loss, as follows:
   - BACKUP: VEEAM B&R and DOCKER were used.
     - VEEAM takes care of the backups of VMs, physical machines and folders.
     The backup is deposited on disks according to an Online/Offline Backup schedule and strategy.
