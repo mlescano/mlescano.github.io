@@ -60,7 +60,7 @@ The last two servers will be used as replication mirrors. This is described belo
 
 ### SERVICE ISOLATION
 
-In order to choose which devices offer certain services and to obtain a better isolation of them, they were grouped according to the CIA concept or triad (Confidentiality, Integrity and Availability) and separated according the convenience as follows:
+In order to choose which devices offer certain services and to obtain a better isolation of them, they were grouped according to the CIA concept (Confidentiality, Integrity and Availability) and separated according the convenience as follows:
 
 
 ![service-isolation](/assets/img/posts/service-organization2.png)
