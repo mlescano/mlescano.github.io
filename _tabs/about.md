@@ -1,8 +1,8 @@
 ---
 # the default layout is 'page'
 icon: fas fa-info-circle
-order: 4
-pin: true
+order: 1
+
 ---
 
 
