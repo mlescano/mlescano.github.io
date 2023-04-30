@@ -11,11 +11,14 @@ pin: true
 
 
 
-I am a skilled Sysadmin transitioning into the world of cloud infrastructure implementation. With a strong foundation in systems administration, I have honed my skills in automating infrastructure deployment, managing virtual environments, and ensuring smooth operations of critical systems.
+I am an experienced system administrator transitioning into the world of cloud infrastructure deployment. With a solid foundation in systems administration, I'm honing my skills to redesign and automate the deployment of hybrid infrastructures, manage virtual environments, and ensure the smooth running of critical systems.
 
-As a DevOps practitioner, I am passionate about bridging the gap between development and operations, ensuring fast and reliable delivery of software applications. I have experience with cloud platforms such as AWS, Azure, and GCP, and have successfully implemented solutions for clients across various industries.
+As a DevOps practitioner, I am passionate about bridging the gap between development and operations, ensuring fast and reliable delivery of software applications. I am currently implementing Docker and Docker Swarm successfully, creating a hybrid cluster for small businesses.
 
-In this portfolio, you will find examples of my work in infrastructure automation, containerization, etc. I hope to showcase my skills and experience and demonstrate my ability to contribute to any DevOps team.
+In this portfolio, you will find examples of my work in infrastructure automation, containerization, etc. In developing my training, I hope to showcase my skills and experience and demonstrate my ability to contribute to any DevOps team.
+
+<!-- As a DevOps practitioner, I am passionate about bridging the gap between development and operations, ensuring fast and reliable delivery of software applications. I have experience with cloud platforms such as AWS, Azure, and GCP, and have successfully implemented solutions for clients across various industries. -->
+
 
 # **Content:**
 
