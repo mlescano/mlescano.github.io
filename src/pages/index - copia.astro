@@ -1,0 +1,94 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Features from '~/components/widgets/Features.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+
+const metadata = {
+  title: 'Martín Lescano | Portafolio Profesional',
+};
+---
+
+<Layout metadata={metadata}>
+  {/* SECCIÓN: HERO / INTRODUCCIÓN */}
+  <Hero>
+    <Fragment slot="title">
+      Martín Lescano
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <strong><br />Responsable de Infraestructura & Líder de Transformación Digital</strong><br /><br />
+      <br />Líder técnico con más de 5 años de trayectoria transformando infraestructuras críticas. Experto en la transición de entornos legacy (ESXi/Hyper-V) hacia arquitecturas modernas, resilientes y de código abierto basadas en Proxmox y Docker. Mi enfoque combina la excelencia técnica en administración de sistemas con una visión estratégica orientada a la eficiencia operativa y la soberanía tecnológica.
+    </Fragment>
+  </Hero>
+
+  {/* SECCIÓN: EVOLUCIÓN (Timeline) */}
+  <Steps
+    id="evolucion"
+    title="🚀 Evolución y Logros de Infraestructura (2021 - 2026)"
+    subtitle="He liderado una hoja de ruta tecnológica incremental, llevando la infraestructura desde la estabilización básica hasta la automatización avanzada."
+    items={[
+      {
+        title: '2024 - 2025: El Salto a la Virtualización de Nueva Generación',
+        description: `
+          <br /><strong>Migración Crítica de Data Center:</strong> Lideré el paso de entornos ESXi 6.7 hacia un Cluster de Alta Disponibilidad (HA) en Proxmox VE, mediante técnicas de clonación y transferencia de discos, eliminando dependencias de licenciamiento privativo.<br /><br />
+          <strong>Arquitectura de Almacenamiento Distribuido:</strong> Implementé un cluster Ceph de 3 nodos utilizando almacenamiento NVMe, optimizando los IOPS y garantizando la persistencia de datos ante fallos de hardware.<br /><br />
+          <strong>Segmentación de Red Profesional:</strong> Rediseño integral de la topología de red mediante VLANs (ID 100) y seguridad perimetral para aislar tráfico crítico y mejorar la performance.
+        `,
+        icon: 'tabler:rocket',
+      },
+      {
+        title: '2021 - 2023: Consolidación y Resiliencia',
+        description: `
+          <br /><strong>Soberanía de Datos:</strong> Implementación de nubes privadas y servicios críticos mediante contenedores (Docker/LXC): Nextcloud para colaboración, Minio para almacenamiento de objetos y Samba para recursos compartidos.<br /><br />
+          <strong>Continuidad de Negocio:</strong> Establecimiento de políticas estrictas de backup utilizando Veeam B&R y posteriormente Proxmox Backup Server, asegurando un RPO/RTO mínimo.<br /><br />
+          <strong>Modernización de Comunicaciones:</strong> Migración de telefonía analógica a VoIP con Issabel 5 sobre contenedores, integrando las comunicaciones de la planta.
+        `,
+        icon: 'tabler:shield-check',
+      },
+    ]}
+  />
+
+  {/* SECCIÓN: PROYECTOS (Aquí aparecerán tus archivos .md) */}
+  <BlogLatestPosts
+    id="proyectos"
+    title="🛠️ Proyectos de Innovación Destacados"
+    information="Selección de hitos técnicos basados en documentación técnica de proyectos ejecutados."
+  />
+
+  {/* SECCIÓN: VISIÓN ESTRATÉGICA */}
+  <Content
+    id="sobre-mi"
+    title="🔮 Visión Estratégica  <br />2026-2027"
+    subtitle="Actualmente lidero la fase de Transformación Inteligente de la compañía, enfocada en:"
+    items={[
+      {
+        title: 'Inteligencia Artificial Local',
+        description: 'Implementación de servidores IA (OCR + Consultas internas) para la digitalización y búsqueda inteligente en documentos de procesos productivos.',
+      },
+      {
+        title: 'Seguridad Avanzada (SOC/SIEM)',
+        description: 'Construcción de un centro de monitoreo de seguridad para la detección temprana de vulnerabilidades y amenazas.',
+      },
+      {
+        title: 'Eficiencia Operativa',
+        description: 'Implementación de plataformas LMS para capacitación de personal y CRM para la integración de áreas clave.',
+      },
+    ]}
+  />
+
+  {/* SECCIÓN: STACK TECNOLÓGICO */}
+  <Features
+    id="habilidades"
+    title="🧰 Stack Tecnológico"
+    items={[
+      { title: 'Virtualización', description: 'Proxmox VE (Cluster HA), LXC, Docker.', icon: 'tabler:server' },
+      { title: 'Almacenamiento', description: 'Ceph, Samba, Minio.', icon: 'tabler:database' },
+      { title: 'Redes', description: 'Unifi, VLANs, LACP, Starlink (Respaldo).', icon: 'tabler:world' },
+      { title: 'Automatización', description: 'Ansible, PowerShell, n8n.', icon: 'tabler:settings-automation' },
+      { title: 'Gestión', description: 'GLPI, MeshCentral, Zabbix (en curso), Issabel 5.', icon: 'tabler:report-analytics' },
+    ]}
+  />
+</Layout>

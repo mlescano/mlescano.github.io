@@ -1,0 +1,113 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Features from '~/components/widgets/Features.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+
+const metadata = {
+  title: 'Martín Lescano | Arquitecto de Infraestructura & Líder IT',
+};
+---
+
+<Layout metadata={metadata}>
+  {/* HERO: PRESENTACIÓN DE IMPACTO */}
+  <Hero
+    actions={[
+      { variant: 'primary', text: 'Ver Proyectos', href: '#proyectos' },
+      { text: 'Sobre mí', href: '#sobre-mi' },
+    ]}
+    image={{ src: '~/assets/images/apple-touch-icon.png', alt: 'Logo Martín Lescano' }}
+  >
+    <Fragment slot="title">
+      Martín Lescano <br /> 
+      <span class="text-primary">Arquitecto de Infraestructura & Líder IT</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Más de una década diseñando y gestionando ecosistemas digitales críticos. Mi enfoque no es solo administrar servidores, sino garantizar la soberanía tecnológica y la continuidad operativa. He liderado la transformación de infraestructuras obsoletas hacia arquitecturas híbridas de alto rendimiento, optimizando costos y escalabilidad mediante virtualización de código abierto.
+    </Fragment>
+  </Hero>
+
+ {/* SOBRE MÍ: TRAYECTORIA PROFESIONAL (LinkedIn Refined) */}
+  <Content
+    id="sobre-mi"
+    title="Trayectoria y Visión"
+    subtitle="Formado en la Universidad Tecnológica Nacional (UTN), he liderado la evolución tecnológica en diversos sectores estratégicos."
+    items={[
+      {
+        title: 'Liderazgo en Infraestructura',
+        description: 'Especialista en la transición de entornos legacy (ESXi/Hyper-V) hacia arquitecturas modernas y resilientes. Capacidad demostrada para gestionar presupuestos tecnológicos y liderar equipos hacia la excelencia operativa.',
+      },
+      {
+        title: 'Soberanía y Seguridad',
+        description: 'Defensor de soluciones que garantizan el control total sobre los datos. Diseño infraestructuras protegidas, escalables y optimizadas bajo estándares internacionales de seguridad.',
+      },
+    ]}
+  />
+
+  {/* EVOLUCIÓN TÉCNICA Y ROLES (Resumen de Experiencia) */}
+  <Steps
+    id="evolucion"
+    title="🚀 Hitos de Trayectoria (LinkedIn)"
+    items={[
+      {
+        title: '2024 - Actualidad: Líder de Infraestructura (Sector Privado)',
+        description: `
+          • <strong>Modernización de Datacenter:</strong> Migración integral de 50+ VMs hacia cluster Proxmox VE con Ceph (NVMe).<br />
+          • <strong>IA Local:</strong> Despliegue de modelos LLM sobre Docker para digitalización inteligente de procesos productivos.<br />
+          • <strong>Estrategia de Backup:</strong> Implementación de Proxmox Backup Server con replicación off-site.
+        `,
+        icon: 'tabler:briefcase',
+      },
+      {
+        title: '2021 - 2023: Responsable IT & Comunicaciones (Sector Industrial)',
+        description: `
+          • <strong>Voz sobre IP:</strong> Transición total a telefonía Issabel 5 sobre contenedores, integrando múltiples sedes.<br />
+          • <strong>Observabilidad:</strong> Centralización de activos con GLPI y gestión fuera de banda mediante MeshCentral.<br />
+          • <strong>Optimización de Recursos:</strong> Consolidación de servidores físicos en entornos virtuales, reduciendo costos energéticos en un 30%.
+        `,
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'Anteriormente: Soporte de Infraestructura & Administración (Sectores Diversos)',
+        description: `
+          • Gestión de redes empresariales basadas en Unifi y segmentación avanzada por VLANs.<br />
+          • Implementación de nubes privadas (Nextcloud/Minio) para colaboración segura de equipos remotos.<br />
+          • Administración de sistemas Windows Server y Linux en alta disponibilidad.
+        `,
+        icon: 'tabler:history',
+      },
+    ]}
+  />
+
+  {/* PROYECTOS DESTACADOS */}
+  <BlogLatestPosts
+    id="proyectos"
+    title="🛠️ Casos de Éxito Documentados"
+    information="Implementaciones técnicas donde la automatización y la arquitectura definieron el éxito del proyecto."
+  />
+
+  {/* FORMACIÓN ACADÉMICA */}
+  <Features
+    title="Formación & Certificaciones"
+    items={[
+      {
+        title: 'Universidad Tecnológica Nacional (UTN)',
+        description: 'Bases de ingeniería y redes. Enfoque analítico para la resolución de problemas complejos.',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Administración de Sistemas Avanzada',
+        description: 'Especializaciones constantes en virtualización de código abierto, seguridad perimetral y automatización.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Gestión de Proyectos IT',
+        description: 'Metodologías para la entrega eficiente de servicios e infraestructura bajo demanda.',
+        icon: 'tabler:template',
+      },
+    ]}
+  />
+</Layout>
