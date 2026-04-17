@@ -6,8 +6,6 @@ site:
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
 
-  integrations: [tailwind()],
-  output: 'static', // Astro 5 por defecto es static, pero mejor asegurar
 
 # Default SEO metadata
 metadata:
