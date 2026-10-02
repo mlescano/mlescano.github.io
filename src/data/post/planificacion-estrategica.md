@@ -2,7 +2,7 @@
 publishDate: 2021-01-15T00:00:00Z
 title: "Planificación Estratégica del Área IT"
 excerpt: "Diseño de la hoja de ruta tecnológica para la transformación digital y estabilización de la infraestructura."
-image: "~/assets/images/planificacion-it.png"
+image: "~/assets/images/diagrams/planificacion-estrategica.svg"
 category: Gestión
 tags: ["Gestión de IT", "Planificación"]
 highlights:

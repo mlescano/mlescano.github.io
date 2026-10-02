@@ -2,7 +2,7 @@
 publishDate: 2026-04-17T00:00:00Z
 title: "Despliegue automatico Zero-Touch: USMT & Windows"
 excerpt: "Automatización del ciclo de vida de puestos de trabajo utilizando USMT y Windows para reducir tiempos operativos."
-image: "~/assets/images/automatizacion_windows_usmt.png"
+image: "~/assets/images/diagrams/usmt-automatizacion.svg"
 category: Automatización
 tags: ["USMT", "PowerShell", "Windows"]
 highlights:

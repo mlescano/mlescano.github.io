@@ -2,7 +2,7 @@
 publishDate: 2026-04-16T00:00:00Z
 title: "Modernización de Datacenter: Cluster Proxmox & Ceph"
 excerpt: "Transformación de un entorno legacy ESXi a un cluster de alta disponibilidad con almacenamiento distribuido NVMe."
-image: "~/assets/images/proxmox-cluster.png"
+image: "~/assets/images/diagrams/proxmox-ceph.svg"
 category: Infraestructura
 tags: ["Proxmox VE", "Ceph", "Alta disponibilidad"]
 highlights:

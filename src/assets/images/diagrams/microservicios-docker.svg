@@ -1,0 +1,45 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de migracion de bare metal a microservicios con Docker Swarm">
+  <rect width="800" height="450" rx="16" fill="#161c26"/>
+  <rect width="800" height="50" rx="16" fill="#10141b"/>
+  <rect y="34" width="800" height="16" fill="#10141b"/>
+  <circle cx="30" cy="25" r="7" fill="#ff5f56"/>
+  <circle cx="54" cy="25" r="7" fill="#ffbd2e"/>
+  <circle cx="78" cy="25" r="7" fill="#27c93f"/>
+  <rect x="150" y="18" width="200" height="14" rx="7" fill="#242c39"/>
+
+  <!-- big bare metal box -->
+  <rect x="100" y="140" width="150" height="180" rx="10" fill="#1c232f" stroke="#38424f" stroke-width="2"/>
+  <g fill="#38424f">
+    <rect x="118" y="160" width="114" height="18" rx="3"/>
+    <rect x="118" y="188" width="114" height="18" rx="3"/>
+    <rect x="118" y="216" width="114" height="18" rx="3"/>
+    <rect x="118" y="244" width="114" height="18" rx="3"/>
+    <rect x="118" y="272" width="114" height="18" rx="3"/>
+  </g>
+
+  <!-- arrow -->
+  <path d="M 270 230 H 400" stroke="#ff7a33" stroke-width="3" fill="none" marker-end="url(#ar)"/>
+  <defs>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#ff7a33"/>
+    </marker>
+  </defs>
+
+  <!-- small containers -->
+  <g>
+    <rect x="430" y="140" width="70" height="70" rx="8" fill="#1c232f" stroke="#8ace25" stroke-width="2"/>
+    <rect x="520" y="140" width="70" height="70" rx="8" fill="#1c232f" stroke="#8ace25" stroke-width="2"/>
+    <rect x="610" y="140" width="70" height="70" rx="8" fill="#1c232f" stroke="#8ace25" stroke-width="2"/>
+    <rect x="430" y="230" width="70" height="70" rx="8" fill="#1c232f" stroke="#8ace25" stroke-width="2"/>
+    <rect x="520" y="230" width="70" height="70" rx="8" fill="#1c232f" stroke="#8ace25" stroke-width="2"/>
+    <rect x="610" y="230" width="70" height="70" rx="8" fill="#1c232f" stroke="#8ace25" stroke-width="2"/>
+  </g>
+  <g fill="#8ace25">
+    <rect x="445" y="165" width="40" height="8" rx="2"/>
+    <rect x="535" y="165" width="40" height="8" rx="2"/>
+    <rect x="625" y="165" width="40" height="8" rx="2"/>
+    <rect x="445" y="255" width="40" height="8" rx="2"/>
+    <rect x="535" y="255" width="40" height="8" rx="2"/>
+    <rect x="625" y="255" width="40" height="8" rx="2"/>
+  </g>
+</svg>

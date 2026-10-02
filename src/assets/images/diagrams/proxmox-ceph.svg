@@ -1,0 +1,49 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de cluster Proxmox con almacenamiento Ceph">
+  <rect width="800" height="450" rx="16" fill="#161c26"/>
+  <rect width="800" height="50" rx="16" fill="#10141b"/>
+  <rect y="34" width="800" height="16" fill="#10141b"/>
+  <circle cx="30" cy="25" r="7" fill="#ff5f56"/>
+  <circle cx="54" cy="25" r="7" fill="#ffbd2e"/>
+  <circle cx="78" cy="25" r="7" fill="#27c93f"/>
+  <rect x="150" y="18" width="200" height="14" rx="7" fill="#242c39"/>
+
+  <!-- 3 server nodes in a ring, representing HA cluster -->
+  <g stroke="#38424f" stroke-width="2" fill="none">
+    <path d="M 290 180 L 400 260"/>
+    <path d="M 510 180 L 400 260"/>
+    <path d="M 290 180 L 510 180"/>
+  </g>
+
+  <!-- node 1 -->
+  <g>
+    <rect x="240" y="130" width="100" height="60" rx="8" fill="#1c232f" stroke="#38424f"/>
+    <rect x="252" y="144" width="76" height="8" rx="2" fill="#8ace25"/>
+    <rect x="252" y="158" width="50" height="8" rx="2" fill="#38424f"/>
+    <rect x="252" y="172" width="60" height="8" rx="2" fill="#38424f"/>
+  </g>
+  <!-- node 2 -->
+  <g>
+    <rect x="460" y="130" width="100" height="60" rx="8" fill="#1c232f" stroke="#38424f"/>
+    <rect x="472" y="144" width="76" height="8" rx="2" fill="#8ace25"/>
+    <rect x="472" y="158" width="50" height="8" rx="2" fill="#38424f"/>
+    <rect x="472" y="172" width="60" height="8" rx="2" fill="#38424f"/>
+  </g>
+  <!-- node 3 -->
+  <g>
+    <rect x="350" y="250" width="100" height="60" rx="8" fill="#1c232f" stroke="#38424f"/>
+    <rect x="362" y="264" width="76" height="8" rx="2" fill="#ff7a33"/>
+    <rect x="362" y="278" width="50" height="8" rx="2" fill="#38424f"/>
+    <rect x="362" y="292" width="60" height="8" rx="2" fill="#38424f"/>
+  </g>
+
+  <!-- Ceph storage ring, bottom -->
+  <g transform="translate(400,375)">
+    <circle r="42" fill="none" stroke="#ff7a33" stroke-width="3" stroke-dasharray="6 6"/>
+    <circle r="8" fill="#ff7a33"/>
+  </g>
+  <g stroke="#38424f" stroke-width="2" fill="none">
+    <path d="M 290 180 L 358 345"/>
+    <path d="M 510 180 L 442 345"/>
+    <path d="M 400 310 L 400 333"/>
+  </g>
+</svg>

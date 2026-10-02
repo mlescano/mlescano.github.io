@@ -2,7 +2,7 @@
 publishDate: 2024-05-10T00:00:00Z
 title: "Ecosistema Proxmox: Integración de PBS"
 excerpt: "Implementación de Proxmox Backup Server para garantizar la integridad y recuperación de datos crítica."
-image: "~/assets/images/proxmox-backup.png"
+image: "~/assets/images/diagrams/proxmox-backup.svg"
 category: Infraestructura
 tags: ["Proxmox Backup Server", "Veeam B&R"]
 highlights:

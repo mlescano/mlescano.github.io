@@ -2,7 +2,7 @@
 publishDate: 2021-06-20T00:00:00Z
 title: "Migración: de Bare Metal a Microservicios"
 excerpt: "Abstracción de la capa de hardware mediante la implementación de arquitecturas basadas en contenedores."
-image: "~/assets/images/microservicios-docker.png"
+image: "~/assets/images/diagrams/microservicios-docker.svg"
 category: Infraestructura
 tags: ["Docker Swarm", "LXC"]
 highlights:

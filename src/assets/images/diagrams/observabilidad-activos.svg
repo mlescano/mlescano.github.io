@@ -1,0 +1,32 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de observabilidad y gestion de activos">
+  <rect width="800" height="450" rx="16" fill="#161c26"/>
+  <rect width="800" height="50" rx="16" fill="#10141b"/>
+  <rect y="34" width="800" height="16" fill="#10141b"/>
+  <circle cx="30" cy="25" r="7" fill="#ff5f56"/>
+  <circle cx="54" cy="25" r="7" fill="#ffbd2e"/>
+  <circle cx="78" cy="25" r="7" fill="#27c93f"/>
+  <rect x="150" y="18" width="200" height="14" rx="7" fill="#242c39"/>
+
+  <!-- sidebar list of assets -->
+  <rect x="100" y="110" width="170" height="260" rx="10" fill="#1c232f" stroke="#38424f"/>
+  <g fill="#38424f">
+    <rect x="118" y="132" width="134" height="24" rx="4"/>
+    <rect x="118" y="168" width="134" height="24" rx="4" fill="#20262f"/>
+    <rect x="118" y="168" width="134" height="24" rx="4" fill="none" stroke="#8ace25" stroke-width="2"/>
+    <rect x="118" y="204" width="134" height="24" rx="4"/>
+    <rect x="118" y="240" width="134" height="24" rx="4"/>
+    <rect x="118" y="276" width="134" height="24" rx="4"/>
+  </g>
+
+  <!-- monitor with pulse -->
+  <g transform="translate(330,130)">
+    <rect width="370" height="220" rx="10" fill="#1c232f" stroke="#38424f"/>
+    <path d="M30 150 h60 l20 -60 l25 100 l20 -70 l15 30 h190" stroke="#ff7a33" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+
+  <!-- magnifying glass -->
+  <g transform="translate(610,300)" stroke="#8ace25" stroke-width="4" fill="none">
+    <circle cx="0" cy="0" r="26"/>
+    <path d="M19 19 L40 40"/>
+  </g>
+</svg>

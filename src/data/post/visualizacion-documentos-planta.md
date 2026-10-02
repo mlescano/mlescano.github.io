@@ -2,7 +2,7 @@
 publishDate: 2026-03-15T00:00:00Z
 title: "Digitalización: Visualización en Planta"
 excerpt: "Implementación de terminales para acceso instantáneo a planos y documentos técnicos en áreas de producción."
-image: "~/assets/images/visualizacion-planta.png"
+image: "~/assets/images/diagrams/visualizacion-planta.svg"
 category: Innovación
 tags: ["Minio", "Terminales industriales"]
 highlights:

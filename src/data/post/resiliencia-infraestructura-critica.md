@@ -2,6 +2,7 @@
 publishDate: 2021-12-01T00:00:00Z
 title: "Resiliencia de Infraestructura Crítica"
 excerpt: "Fortalecimiento del núcleo IT mediante seguridad de routers, UPS centralizadas y políticas de backup con Veeam."
+image: "~/assets/images/diagrams/resiliencia-infraestructura.svg"
 category: Infraestructura
 tags: ["Veeam B&R", "UPS", "Seguridad de red"]
 highlights:

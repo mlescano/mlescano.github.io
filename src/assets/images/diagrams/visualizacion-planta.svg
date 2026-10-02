@@ -1,0 +1,30 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de terminal de visualizacion de documentos en planta">
+  <rect width="800" height="450" rx="16" fill="#161c26"/>
+  <rect width="800" height="50" rx="16" fill="#10141b"/>
+  <rect y="34" width="800" height="16" fill="#10141b"/>
+  <circle cx="30" cy="25" r="7" fill="#ff5f56"/>
+  <circle cx="54" cy="25" r="7" fill="#ffbd2e"/>
+  <circle cx="78" cy="25" r="7" fill="#27c93f"/>
+  <rect x="150" y="18" width="200" height="14" rx="7" fill="#242c39"/>
+
+  <!-- industrial terminal/kiosk -->
+  <rect x="300" y="110" width="200" height="150" rx="10" fill="#1c232f" stroke="#38424f" stroke-width="2"/>
+  <rect x="380" y="260" width="40" height="60" fill="#1c232f" stroke="#38424f" stroke-width="2"/>
+  <rect x="340" y="320" width="120" height="14" rx="6" fill="#1c232f" stroke="#38424f" stroke-width="2"/>
+
+  <!-- blueprint/document icon on screen -->
+  <g transform="translate(320,128)">
+    <rect width="160" height="114" rx="4" fill="#10141b"/>
+    <g stroke="#8ace25" stroke-width="2" fill="none">
+      <rect x="16" y="14" width="128" height="86" rx="2"/>
+      <path d="M16 50 h128 M60 14 v86 M60 50 L90 14 M90 50 L60 86"/>
+    </g>
+  </g>
+
+  <!-- version check badge -->
+  <g transform="translate(560,160)">
+    <circle r="36" fill="#1c232f" stroke="#8ace25" stroke-width="3"/>
+    <path d="M-14 0 L-3 12 L16 -12" stroke="#8ace25" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <path d="M500 150 L524 155" stroke="#38424f" stroke-width="2" stroke-dasharray="3 4"/>
+</svg>

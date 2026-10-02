@@ -1,0 +1,28 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de almacenamiento de objetos con Minio">
+  <rect width="800" height="450" rx="16" fill="#161c26"/>
+  <rect width="800" height="50" rx="16" fill="#10141b"/>
+  <rect y="34" width="800" height="16" fill="#10141b"/>
+  <circle cx="30" cy="25" r="7" fill="#ff5f56"/>
+  <circle cx="54" cy="25" r="7" fill="#ffbd2e"/>
+  <circle cx="78" cy="25" r="7" fill="#27c93f"/>
+  <rect x="150" y="18" width="200" height="14" rx="7" fill="#242c39"/>
+
+  <!-- bucket -->
+  <g transform="translate(300,150)">
+    <path d="M10 10 L190 10 L170 190 L30 190 Z" fill="#1c232f" stroke="#8ace25" stroke-width="3"/>
+    <path d="M0 10 h200" stroke="#8ace25" stroke-width="3"/>
+    <path d="M60 10 V-20 a40 20 0 0 1 80 0 V10" fill="none" stroke="#8ace25" stroke-width="3"/>
+  </g>
+
+  <!-- file icons flowing in -->
+  <g fill="#1c232f" stroke="#ff7a33" stroke-width="2">
+    <rect x="560" y="90" width="60" height="70" rx="6"/>
+    <rect x="600" y="140" width="60" height="70" rx="6"/>
+    <rect x="560" y="190" width="60" height="70" rx="6"/>
+  </g>
+  <g stroke="#38424f" stroke-width="2" stroke-dasharray="4 5" fill="none">
+    <path d="M560 120 Q 460 140 420 170"/>
+    <path d="M600 175 Q 500 200 420 200"/>
+    <path d="M560 220 Q 460 230 420 230"/>
+  </g>
+</svg>

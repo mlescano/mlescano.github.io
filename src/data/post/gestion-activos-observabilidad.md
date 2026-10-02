@@ -2,7 +2,7 @@
 publishDate: 2026-04-16T00:00:00Z
 title: "Observabilidad y Gestión Proactiva de Activos"
 excerpt: "Ecosistema de monitoreo y soporte remoto combinando GLPI y MeshCentral para una administración total."
-image: "~/assets/images/observabilidad-it.png"
+image: "~/assets/images/diagrams/observabilidad-activos.svg"
 category: Gestión
 tags: ["GLPI", "MeshCentral"]
 highlights:

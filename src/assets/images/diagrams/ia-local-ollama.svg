@@ -1,0 +1,30 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de prueba de concepto de IA local con Ollama">
+  <rect width="800" height="450" rx="16" fill="#161c26"/>
+  <rect width="800" height="50" rx="16" fill="#10141b"/>
+  <rect y="34" width="800" height="16" fill="#10141b"/>
+  <circle cx="30" cy="25" r="7" fill="#ff5f56"/>
+  <circle cx="54" cy="25" r="7" fill="#ffbd2e"/>
+  <circle cx="78" cy="25" r="7" fill="#27c93f"/>
+  <rect x="150" y="18" width="200" height="14" rx="7" fill="#242c39"/>
+
+  <!-- local machine box, dashed boundary = "no cloud" -->
+  <rect x="160" y="110" width="480" height="260" rx="14" fill="none" stroke="#38424f" stroke-width="2" stroke-dasharray="8 6"/>
+
+  <!-- chip -->
+  <g transform="translate(400,240)">
+    <rect x="-55" y="-55" width="110" height="110" rx="10" fill="#1c232f" stroke="#8ace25" stroke-width="3"/>
+    <rect x="-25" y="-25" width="50" height="50" rx="4" fill="none" stroke="#8ace25" stroke-width="2"/>
+    <g stroke="#8ace25" stroke-width="3">
+      <path d="M-55 -30 h-20 M-55 0 h-20 M-55 30 h-20"/>
+      <path d="M55 -30 h20 M55 0 h20 M55 30 h20"/>
+      <path d="M-30 -55 v-20 M0 -55 v-20 M30 -55 v-20"/>
+      <path d="M-30 55 v20 M0 55 v20 M30 55 v20"/>
+    </g>
+  </g>
+
+  <!-- crossed cloud, top right, representing "no depende de la nube" -->
+  <g transform="translate(680,150)" stroke="#8b96a7" stroke-width="3" fill="none">
+    <path d="M-30 10 a16 16 0 0 1 4 -31 a22 22 0 0 1 42 6 a16 16 0 0 1 4 29 Z"/>
+    <path d="M-35 -15 L15 25" stroke="#ff7a33"/>
+  </g>
+</svg>

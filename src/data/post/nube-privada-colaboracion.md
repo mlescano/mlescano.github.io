@@ -2,7 +2,7 @@
 publishDate: 2026-03-25T00:00:00Z
 title: "Almacenamiento de Objetos On-Premise con Minio"
 excerpt: "Evaluación de dos alternativas de almacenamiento privado y adopción de Minio como backend de objetos."
-image: "~/assets/images/cloud-privada.png"
+image: "~/assets/images/diagrams/minio-almacenamiento.svg"
 category: Infraestructura
 tags: ["Minio", "S3 compatible"]
 highlights:

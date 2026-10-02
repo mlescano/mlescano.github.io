@@ -2,6 +2,7 @@
 publishDate: 2026-02-01T00:00:00Z
 title: "Comunicaciones Unificadas: VoIP Issabel 5"
 excerpt: "Implementación de telefonía IP escalable para la integración de sedes y optimización de costos."
+image: "~/assets/images/diagrams/voip-issabel.svg"
 category: Infraestructura
 tags: ["Issabel 5", "VoIP"]
 highlights:
