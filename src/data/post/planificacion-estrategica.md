@@ -1,7 +1,7 @@
 ---
 publishDate: 2021-01-15T00:00:00Z
 title: "Planificación Estratégica del Área IT"
-excerpt: "Diseño de la hoja de ruta tecnológica para la transformación digital y estabilización de la infraestructura."
+excerpt: "Elaboré el Plan Estratégico de TI 2021–2026, por fases, y lo vengo ejecutando año a año desde entonces como hoja de ruta del área."
 image: "~/assets/images/diagrams/planificacion-estrategica.svg"
 category: Gestión
 tags: ["Gestión de IT", "Planificación"]
@@ -11,10 +11,10 @@ highlights:
   - "Hoja de ruta ejecutada 2021–2024"
 ---
 ### El Desafío
-Organizar un departamento de IT que carecía de procesos estandarizados y visión a largo plazo para soportar el crecimiento de la compañía.
+Al llegar al área, no había una visión a largo plazo ni procesos estandarizados que guiaran las decisiones de TI: cada necesidad se resolvía según surgía, sin un criterio de prioridades compartido.
 
 ### La Solución
-Desarrollé un plan maestro centrado en:
-* **Auditoría Inicial:** Diagnóstico profundo de hardware, software y seguridad.
-* **Priorización:** Establecimiento de fases de ejecución (Estabilización, Modernización e Innovación).
-* **Resultado:** Una hoja de ruta clara que permitió ejecutar con éxito proyectos complejos en los años siguientes (2022-2024).
+Elaboré un plan maestro propio, el **Plan Estratégico de TI 2021–2026**, a partir de una auditoría inicial de hardware, software y seguridad. Lo organicé en fases — estabilización, modernización e innovación — para que cada año construyera sobre lo anterior en vez de saltar de un proyecto a otro sin relación entre sí.
+
+### Resultado
+Esa hoja de ruta es la que fui ejecutando año a año: la estabilización del núcleo tecnológico y las políticas de backup en 2021, la migración de bases de datos y nueva infraestructura de red en 2022, la adopción de contenedores en 2023, y la migración completa a Proxmox en 2024. No fue un documento que quedó archivado — es el plan que sigo usando para decidir qué hacer cada año.
