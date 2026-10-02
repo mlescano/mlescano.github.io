@@ -2,12 +2,11 @@
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 
 import Layout from '~/layouts/PageLayout.astro';
-import BlogList from '~/components/blog/List.astro';
-import Headline from '~/components/blog/Headline.astro';
-import Pagination from '~/components/blog/Pagination.astro';
-// import PostTags from "~/components/blog/Tags.astro";
+import Image from '~/components/common/Image.astro';
 
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
+import { findImage } from '~/utils/images';
+import { getPermalink } from '~/utils/permalinks';
 
 export const prerender = true;
 
@@ -20,9 +19,6 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
-// const allCategories = await findCategories();
-// const allTags = await findTags();
-
 const metadata = {
   title: `Blog${currentPage > 1 ? ` — Página ${currentPage}` : ''}`,
   robots: {
@@ -33,18 +29,112 @@ const metadata = {
     type: 'blog',
   },
 };
+
+const posts = await Promise.all(
+  page.data.map(async (post) => ({
+    title: post.title,
+    summary: post.excerpt,
+    href: getPermalink(post.permalink, 'post'),
+    image: await findImage(post.image),
+    tags: post.tags ?? [],
+    featured: post.featured ?? false,
+  }))
+);
 ---
 
 <Layout metadata={metadata}>
-  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
-    <Headline subtitle="Casos documentados y artículos sobre infraestructura, virtualización y automatización.">
-      Blog
-    </Headline>
-    <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    <!--
-      <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
-      <PostTags tags={allTags}  title="Search by Tags:" />
-    -->
+  <section class="ml-hero ml-hero-sm">
+    <div class="ml-container">
+      <div class="ml-eyebrow">Blog</div>
+      <h1 class="ml-page-title">Casos documentados</h1>
+      <p class="ml-lead">
+        Artículos sobre infraestructura, virtualización y automatización: problema, decisión y resultado de cada
+        proyecto.
+      </p>
+    </div>
+  </section>
+
+  <section class="ml-section">
+    <div class="ml-container">
+      <div class="ml-case-grid-3 ml-reveal" data-ml-reveal>
+        {
+          posts.map((p) => (
+            <a class="ml-case-card" href={p.href}>
+              {p.featured && <span class="ml-case-badge">Destacado</span>}
+              <div class="ml-case-img">
+                {p.image && (
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    width={400}
+                    height={225}
+                    aspectRatio="16:9"
+                    layout="cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </div>
+              <div class="ml-case-body">
+                <h3>{p.title}</h3>
+                <p>{p.summary}</p>
+                {p.tags && p.tags.length > 0 && (
+                  <div class="ml-case-tags">
+                    {p.tags.map((tag) => (
+                      <span class="ml-case-tag">{tag.title}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      {
+        (page.url.prev || page.url.next) && (
+          <div class="ml-pagination">
+            {page.url.prev ? (
+              <a class="ml-btn ml-btn-outline" href={page.url.prev}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+                Más recientes
+              </a>
+            ) : (
+              <span />
+            )}
+            {page.url.next && (
+              <a class="ml-btn ml-btn-outline" href={page.url.next}>
+                Más antiguos
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </a>
+            )}
+          </div>
+        )
+      }
+    </div>
   </section>
 </Layout>
+
+<script>
+  const revealEls = document.querySelectorAll<HTMLElement>('[data-ml-reveal]');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    revealEls.forEach((el) => observer.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('is-in'));
+  }
+</script>
