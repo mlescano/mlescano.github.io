@@ -30,7 +30,7 @@ const aboutCards = [
 ];
 
 const stats = [
-  { num: '5+', label: 'Años en Sohipren S.A.' },
+  { num: '5+', label: 'Años en el cargo actual' },
   { num: '86%', label: 'Reducción de costos de infraestructura' },
   { num: '50+', label: 'VMs migradas a Proxmox + Ceph' },
   { num: '40+', label: 'Proyectos ejecutados (2021–2026)' },
@@ -49,6 +49,9 @@ const stack = [
   { name: 'Starlink', cat: 'Redes', abbr: 'ST' },
   { name: 'Active Directory', cat: 'Sistemas', abbr: 'AD' },
   { name: 'GPO', cat: 'Sistemas', abbr: 'GP' },
+  { name: 'SQL Server', cat: 'Sistemas', abbr: 'SQ' },
+  { name: 'RemoteApp', cat: 'Sistemas', abbr: 'RA' },
+  { name: 'Minio', cat: 'Infraestructura', abbr: 'MN' },
   { name: 'GLPI', cat: 'Soporte', abbr: 'GL' },
   { name: 'MeshCentral', cat: 'Soporte', abbr: 'MC' },
   { name: 'USMT', cat: 'Soporte', abbr: 'US' },
@@ -58,6 +61,8 @@ const timeline = [
   {
     year: '2021',
     titulo: 'Continuidad del Negocio',
+    resumen:
+      'Modernización base de sistemas operativos, dominio y backup, con foco en continuidad operativa de la infraestructura.',
     short: '01',
     status: 'Completado',
     items: [
@@ -71,11 +76,13 @@ const timeline = [
       'UPS para servidores',
       'Veeam B&R',
     ],
-    tags: ['Veeam B&R', 'Windows Server'],
+    tags: ['Veeam B&R', 'Windows Server', 'Active Directory', 'UPS'],
   },
   {
     year: '2022',
     titulo: 'Seguridad de la Información',
+    resumen:
+      'Refuerzo de seguridad perimetral y de correo, junto con la migración de bases de datos y nueva infraestructura de red.',
     short: '02',
     status: 'Completado',
     items: [
@@ -88,11 +95,13 @@ const timeline = [
       'Seguridad de Gmail',
       'Desarrollo de scripts',
     ],
-    tags: ['SQL Server', 'RemoteApp'],
+    tags: ['SQL Server', 'RemoteApp', 'Antivirus', 'Google Workspace'],
   },
   {
     year: '2023',
     titulo: 'Transformación Digital',
+    resumen:
+      'Adopción de contenedores y políticas de gobierno de TI, junto con mejoras de conectividad y seguridad de red.',
     short: '03',
     status: 'Completado',
     items: [
@@ -103,11 +112,13 @@ const timeline = [
       'Seguridad SSL',
       'UPS grabado',
     ],
-    tags: ['Docker Swarm', 'GPO'],
+    tags: ['Docker Swarm', 'GPO', 'SSL/TLS', 'Fibra óptica'],
   },
   {
     year: '2024',
     titulo: 'Transformación Digital',
+    resumen:
+      'Migración integral a una plataforma de virtualización propia con Proxmox, sumando conectividad satelital y telefonía IP.',
     short: '04',
     status: 'Completado',
     items: [
@@ -121,19 +132,21 @@ const timeline = [
       'Planificación',
       'Capacitación en ciberseguridad',
     ],
-    tags: ['Proxmox VE', 'Starlink'],
+    tags: ['Proxmox VE', 'Proxmox Backup Server', 'Starlink', 'VoIP'],
   },
   {
     year: '2025',
     titulo: 'Continuidad del Negocio',
+    resumen: 'Consolidación de la migración a Proxmox con monitoreo activo de servidores críticos.',
     short: '05',
     status: 'Completado',
     items: ['Monitoreo de servidores críticos', 'Migración de más de 50 VMs de servidores ESXi a Proxmox'],
-    tags: ['Proxmox VE', 'Ceph'],
+    tags: ['Proxmox VE', 'Ceph', 'VMware ESXi'],
   },
   {
     year: '2026',
     titulo: 'Soporte a la Innovación',
+    resumen: 'Despliegue de nuevas herramientas internas y digitalización de procesos de planta y soporte.',
     short: '06',
     status: 'En curso',
     items: [
@@ -148,7 +161,7 @@ const timeline = [
       'App de soporte remoto',
       'Servicio de despliegue automático de PCs',
     ],
-    tags: ['Issabel 5', 'Minio'],
+    tags: ['Issabel 5', 'Minio', 'Nextcloud', 'Wi-Fi'],
   },
 ];
 
@@ -192,7 +205,7 @@ const habilidades = [
   },
   {
     titulo: 'Pensamiento estratégico',
-    desc: 'Autor del Plan Estratégico de TI 2021–2026 de Sohipren, ejecutado año a año.',
+    desc: 'Autor del Plan Estratégico de TI 2021–2026, ejecutado año a año.',
     icon: 'target',
   },
   {
@@ -307,8 +320,8 @@ const casos = await Promise.all(
         <div class="ml-eyebrow">Sobre mí</div>
         <h2 class="ml-section-title">Infraestructura con criterio, no por moda</h2>
         <p class="ml-lead">
-          Responsable de Área de TI en Sohipren S.A. (industria metalúrgica exportadora) desde 2021, con el objetivo
-          de crecer hacia la dirección de áreas de TI.
+          Responsable de Área de TI en una industria metalúrgica exportadora desde 2021, con el objetivo de crecer
+          hacia la dirección de áreas de TI.
         </p>
       </div>
       <div class="ml-grid-3 ml-reveal" data-ml-reveal>
@@ -383,7 +396,7 @@ const casos = await Promise.all(
         <div class="ml-eyebrow" style="color:var(--ml-accent)">Trayectoria</div>
         <h2 class="ml-section-title">Plan Estratégico de TI 2021–2026</h2>
         <p class="ml-lead">
-          Hitos ejecutados en Sohipren S.A., sobre un plan que elaboré y vengo llevando adelante año a año.
+          Hitos ejecutados sobre un plan que elaboré y vengo llevando adelante año a año.
         </p>
       </div>
       <div class="ml-timeline ml-reveal" data-ml-reveal>
@@ -392,12 +405,15 @@ const casos = await Promise.all(
             <div class="ml-tl-row">
               <div class="ml-tl-dot" />
               <div class="ml-tl-card">
-                <div class="ml-exp-top">
+                <div class="ml-tl-card-top-v2">
                   <div>
                     <h3>{t.titulo}</h3>
-                    <div class="ml-exp-meta">{t.year}</div>
+                    <p class="ml-tl-summary">{t.resumen}</p>
                   </div>
-                  <span class="ml-exp-period">{t.status}</span>
+                  <div class="ml-tl-year-block">
+                    <div class="ml-tl-year-big">{t.year}</div>
+                    <span class="ml-tl-status-badge">{t.status}</span>
+                  </div>
                 </div>
                 <div class="ml-tl-eyebrow">Logros clave</div>
                 <ul class="ml-tl-list">

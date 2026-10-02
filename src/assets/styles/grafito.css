@@ -497,19 +497,35 @@ p.ml-sub {
   transform: translateY(-3px);
   border-color: var(--ml-accent);
 }
-.ml-tl-card-top {
+.ml-tl-card-top-v2 {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
   margin-bottom: 18px;
 }
-.ml-tl-year {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--ml-accent);
+.ml-tl-summary {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--aw-color-text-muted);
+  max-width: 48ch;
 }
-.ml-tl-badge {
+.ml-tl-year-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.ml-tl-year-big {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ml-lime);
+}
+.ml-tl-status-badge {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -518,6 +534,7 @@ p.ml-sub {
   border: 1px solid var(--ml-accent);
   border-radius: 999px;
   padding: 4px 12px;
+  white-space: nowrap;
 }
 .ml-tl-list {
   list-style: none;
