@@ -4,29 +4,51 @@ import '@fontsource-variable/montserrat';
 
 <style is:inline is:global>
   :root {
-    /* Tipografía Montserrat, coherente con la portada de LinkedIn */
+    /* Tipografía Montserrat */
     --aw-font-sans: 'Montserrat Variable';
     --aw-font-serif: 'Montserrat Variable';
     --aw-font-heading: 'Montserrat Variable';
 
-    --aw-color-primary: #8ace25;     /* #00BCD4; Cian del logo */
-    --aw-color-secondary: #00BCD4;  /* #0097A7; Cian oscuro para contraste */
-    --aw-color-accent: #FFC107;     /* Amarillo/Ámbar de la abeja */
+    /* Paleta "Grafito": gris azulado + mandarina, lima como acento secundario */
+    --aw-color-primary: #5e8a12;
+    --aw-color-secondary: #d9571b;
+    --aw-color-accent: #d9571b;
 
-    --aw-color-text-default: rgb(16 16 16);
-    --aw-color-text-muted: rgb(16 16 16 / 66%);
-    --aw-color-bg-page: #F0F9FA;    /* Fondo Cian Pastel muy suave */
+    --aw-color-text-default: #131822;
+    --aw-color-text-muted: rgb(19 24 34 / 66%);
+    --aw-color-bg-page: #eef1f5;
 
-    --aw-color-bg-page-dark: #030620;
+    --aw-color-bg-page-dark: #10141b;
+
+    /* Tokens propios del diseño (home, tarjetas, timeline, stack) */
+    --ml-bg-elev: #ffffff;
+    --ml-bg-elev-2: #e4e8ee;
+    --ml-border: #d8dee6;
+    --ml-border-strong: #c0c8d2;
+    --ml-dot: #dde3ea;
+    --ml-lime: #5e8a12;
+    --ml-lime-text: #ffffff;
+    --ml-accent: #d9571b;
+    --ml-accent-text: #ffffff;
   }
 
   .dark {
-    --aw-color-primary: #00BCD4;
-    --aw-color-secondary: #00838F;
-    --aw-color-accent: #FFB300;
+    --aw-color-primary: #8ace25;
+    --aw-color-secondary: #ff7a33;
+    --aw-color-accent: #ff7a33;
 
-    --aw-color-text-default: rgb(229 236 246);
-    --aw-color-text-muted: rgb(229 236 246 / 66%);
-    --aw-color-bg-page: #030620;
+    --aw-color-text-default: #e9ecf1;
+    --aw-color-text-muted: rgb(233 236 241 / 66%);
+    --aw-color-bg-page: #10141b;
+
+    --ml-bg-elev: #161c26;
+    --ml-bg-elev-2: #1c232f;
+    --ml-border: #242c39;
+    --ml-border-strong: #38424f;
+    --ml-dot: #1c2430;
+    --ml-lime: #8ace25;
+    --ml-lime-text: #10141b;
+    --ml-accent: #ff7a33;
+    --ml-accent-text: #10141b;
   }
 </style>

@@ -1,231 +1,1280 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Content from '~/components/widgets/Content.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Features from '~/components/widgets/Features.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import Image from '~/components/common/Image.astro';
+
+import { findLatestPosts } from '~/utils/blog';
+import { findImage } from '~/utils/images';
+import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'Martín Lescano | Responsable de Área de TI',
   ignoreTitleTemplate: true,
 };
 
-const heroNetworkImage = `
-<svg viewBox="0 0 800 450" class="w-full rounded-md shadow-lg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Red de nodos de infraestructura">
-  <rect width="800" height="450" rx="16" fill="#0b0f14" />
-  <g stroke="#8ace25" stroke-width="1.4" opacity="0.55">
-    <line x1="120" y1="110" x2="300" y2="90" />
-    <line x1="300" y1="90" x2="470" y2="150" />
-    <line x1="300" y1="90" x2="260" y2="230" />
-    <line x1="470" y1="150" x2="640" y2="120" />
-    <line x1="470" y1="150" x2="520" y2="300" />
-    <line x1="260" y1="230" x2="130" y2="300" />
-    <line x1="260" y1="230" x2="420" y2="310" />
-    <line x1="420" y1="310" x2="520" y2="300" />
-    <line x1="520" y1="300" x2="670" y2="330" />
-    <line x1="130" y1="300" x2="220" y2="380" />
-    <line x1="420" y1="310" x2="360" y2="390" />
-    <line x1="640" y1="120" x2="690" y2="230" />
-    <line x1="690" y1="230" x2="670" y2="330" />
-  </g>
-  <g fill="#8ace25">
-    <circle cx="120" cy="110" r="5" />
-    <circle cx="300" cy="90" r="6" />
-    <circle cx="470" cy="150" r="7" />
-    <circle cx="640" cy="120" r="5" />
-    <circle cx="260" cy="230" r="6" />
-    <circle cx="690" cy="230" r="5" />
-    <circle cx="130" cy="300" r="5" />
-    <circle cx="420" cy="310" r="6" />
-    <circle cx="520" cy="300" r="7" />
-    <circle cx="670" cy="330" r="5" />
-    <circle cx="220" cy="380" r="5" />
-    <circle cx="360" cy="390" r="5" />
-  </g>
-</svg>
-`;
+const aboutCards = [
+  {
+    title: 'Infraestructura y virtualización',
+    desc: 'Diseñé e implementé la plataforma propia sobre Proxmox VE y Ceph, en reemplazo de VMware ESXi: compra de hardware, diseño de VLAN y conectividad entre nodos, y definición de servicios con alta disponibilidad.',
+    icon: 'rack',
+  },
+  {
+    title: 'Backup y continuidad operativa',
+    desc: 'Estrategia de backup y recuperación ante desastres con Veeam B&R y Proxmox Backup Server con réplica off-site, reduciendo de forma estimada el tiempo de restauración de ~22 horas a menos de 4 horas.',
+    icon: 'shield',
+  },
+  {
+    title: 'Automatización con criterio determinista',
+    desc: 'Desarrollo, con asistencia de IA, aplicaciones y automatizaciones para procesos de soporte. Uso soluciones deterministas, e IA solo donde aporta valor.',
+    icon: 'gear',
+  },
+];
+
+const stats = [
+  { num: '5+', label: 'Años en Sohipren S.A.' },
+  { num: '86%', label: 'Reducción de costos de infraestructura' },
+  { num: '50+', label: 'VMs migradas a Proxmox + Ceph' },
+  { num: '40+', label: 'Proyectos ejecutados (2021–2026)' },
+];
+
+const stackCategories = ['Todo', 'Infraestructura', 'Redes', 'Sistemas', 'Soporte'];
+const stack = [
+  { name: 'Proxmox VE', cat: 'Infraestructura', abbr: 'PX' },
+  { name: 'Ceph', cat: 'Infraestructura', abbr: 'CE' },
+  { name: 'Proxmox Backup Server', cat: 'Infraestructura', abbr: 'PB' },
+  { name: 'Veeam B&R', cat: 'Infraestructura', abbr: 'VB' },
+  { name: 'Docker Swarm', cat: 'Infraestructura', abbr: 'DK' },
+  { name: 'Mikrotik', cat: 'Redes', abbr: 'MK' },
+  { name: 'Ubiquiti UniFi', cat: 'Redes', abbr: 'UF' },
+  { name: 'Issabel 5 (VoIP)', cat: 'Redes', abbr: 'IS' },
+  { name: 'Starlink', cat: 'Redes', abbr: 'ST' },
+  { name: 'Active Directory', cat: 'Sistemas', abbr: 'AD' },
+  { name: 'GPO', cat: 'Sistemas', abbr: 'GP' },
+  { name: 'GLPI', cat: 'Soporte', abbr: 'GL' },
+  { name: 'MeshCentral', cat: 'Soporte', abbr: 'MC' },
+  { name: 'USMT', cat: 'Soporte', abbr: 'US' },
+];
+
+const timeline = [
+  {
+    year: '2021',
+    short: '01',
+    status: 'Completado',
+    items: [
+      'Actualización de S.O.',
+      'Infraestructura',
+      'Microservicios',
+      'Migración de dominio',
+      'Políticas de backup',
+      'Red profesional',
+      'Seguridad del router',
+      'UPS para servidores',
+      'Veeam B&R',
+    ],
+  },
+  {
+    year: '2022',
+    short: '02',
+    status: 'Completado',
+    items: [
+      'Antivirus',
+      'Banco de pruebas',
+      'Migración de SQL',
+      'Nuevo router',
+      'Red del galpón',
+      'RemoteApp',
+      'Seguridad de Gmail',
+      'Desarrollo de scripts',
+    ],
+  },
+  {
+    year: '2023',
+    short: '03',
+    status: 'Completado',
+    items: [
+      'Docker Swarm',
+      'GPO',
+      'Red de fibra',
+      'Seguridad contra dispositivos desconocidos',
+      'Seguridad SSL',
+      'UPS grabado',
+    ],
+  },
+  {
+    year: '2024',
+    short: '04',
+    status: 'Completado',
+    items: [
+      'Infraestructura Proxmox',
+      'Proxmox Backup',
+      'Aire acondicionado',
+      'UPS para PCs críticas',
+      'Internet satelital Starlink',
+      'Telefonía VoIP',
+      'Desarrollo de scripts',
+      'Planificación',
+      'Capacitación en ciberseguridad',
+    ],
+  },
+  {
+    year: '2025',
+    short: '05',
+    status: 'Completado',
+    items: ['Monitoreo de servidores críticos', 'Migración de más de 50 VMs de servidores ESXi a Proxmox'],
+  },
+  {
+    year: '2026',
+    short: '06',
+    status: 'En curso',
+    items: [
+      'Instalación de VoIP con Issabel 5',
+      'Instalación de Minio',
+      'Instalación de Nextcloud',
+      'Digitalización de documentos de armado y prueba',
+      'Estabilización de infraestructura',
+      'Modernización de infraestructura',
+      'Gestión de programas de CNC',
+      'Mejora de Wi-Fi',
+      'App de soporte remoto',
+      'Servicio de despliegue automático de PCs',
+    ],
+  },
+];
+
+const experiencia = [
+  {
+    empresa: 'Sila Holding Industriale',
+    cargo: 'IT Manager',
+    anios: '2008–2009 y 2015–2016',
+    desc: 'Reportando a la dirección. Ahorro del 60% en costos de IT. Coordiné la implementación del ERP Protheus V.8 con Totvs.',
+  },
+  {
+    empresa: 'ML Services & GFG Informática',
+    cargo: 'Owner/Partner',
+    anios: '2016–2021',
+    desc: 'Consultoría en virtualización VMware vSphere, redes, backup y seguridad. +30% de eficiencia y −40% de inactividad para clientes.',
+  },
+  {
+    empresa: 'Hewlett-Packard',
+    cargo: 'Information Security Consultant',
+    anios: '2009–2011',
+    desc: 'Administración de accesos para clientes. Documentación adoptada a nivel global.',
+  },
+];
+
+const formacion = [
+  {
+    titulo: 'Ingeniería en Sistemas de Información',
+    institucion: 'Universidad Tecnológica Nacional (UTN FRC)',
+    status: 'En curso',
+  },
+  { titulo: 'Diplomatura en Gestión de Negocios', institucion: 'Universidad Siglo 21', status: 'En curso' },
+  {
+    titulo: 'Administrador de Redes de Computadoras',
+    institucion: 'Universidad Tecnológica Nacional (UTN FRC) — 2015',
+    status: '',
+  },
+  {
+    titulo: 'Ciencias de la Computación e Información',
+    institucion: 'Universidad Johann Wolfgang Goethe, Alemania (2001–2007)',
+    status: '',
+  },
+  {
+    titulo: 'Cursos Platzi',
+    institucion: 'Project Management, AWS, Servidores Linux, Ingeniería de Software, entre otros',
+    status: '',
+  },
+  { titulo: 'Idiomas', institucion: 'Español nativo, alemán fluido, portugués fluido, inglés B2', status: '' },
+];
+
+const latestPosts = await findLatestPosts({ count: 4 });
+const casos = await Promise.all(
+  latestPosts.map(async (post) => ({
+    title: post.title,
+    summary: post.excerpt,
+    category: typeof post.category === 'object' ? post.category?.title : post.category,
+    href: getPermalink(post.permalink, 'post'),
+    image: await findImage(post.image),
+  }))
+);
 ---
 
 <Layout metadata={metadata}>
-  {/* HERO */}
-  <Hero
-    actions={[
-      { variant: 'primary', text: 'Ver casos', href: '#proyectos' },
-      { text: 'Contacto', href: '#contacto' },
-    ]}
-    image={heroNetworkImage}
-  >
-    <Fragment slot="title">
-      Martín Lescano <br />
-      <span class="text-primary">Responsable de Área de TI</span>
-    </Fragment>
+  <section class="ml-hero" id="inicio">
+    <div class="ml-container">
+      <div class="ml-hero-meta ml-hero-in" style="animation-delay:0ms">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          ><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="9" r="2.5"
+          ></circle></svg
+        >
+        Córdoba, Argentina
+      </div>
+      <div class="ml-hero-greeting ml-hero-in" style="animation-delay:80ms">Hola, soy</div>
+      <h1 class="ml-hero-in" style="animation-delay:160ms">Martín Lescano</h1>
+      <div class="ml-role ml-hero-in" style="animation-delay:240ms">// Responsable de Área de TI</div>
+      <p class="ml-sub ml-hero-in" style="animation-delay:320ms">
+        Liderazgo técnico y estrategia en infraestructura resiliente: Proxmox, Ceph y alta disponibilidad, con un
+        criterio claro de soluciones deterministas y automatización donde aporta valor real.
+      </p>
+      <div class="ml-hero-actions ml-hero-in" style="animation-delay:400ms">
+        <a class="ml-btn ml-btn-solid" href="#proyectos">Ver casos</a>
+        <a class="ml-btn ml-btn-outline" href="#contacto">Contacto</a>
+      </div>
+    </div>
+    <div class="ml-scroll-cue">
+      <span>Scroll</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        ><path d="M12 5v14M5 12l7 7 7-7"></path></svg
+      >
+    </div>
+  </section>
 
-    <Fragment slot="subtitle">
-      Liderazgo técnico y estrategia en infraestructura resiliente: Proxmox, Ceph y alta disponibilidad, con un
-      criterio claro de soluciones deterministas y automatización donde aporta valor real.
-    </Fragment>
-  </Hero>
+  <section class="ml-stats">
+    <div class="ml-container">
+      <div class="ml-stats-grid ml-reveal" data-ml-reveal>
+        {
+          stats.map((s) => (
+            <div class="ml-stat">
+              <div class="ml-stat-num">{s.num}</div>
+              <div class="ml-stat-label">{s.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  {/* SOBRE MÍ */}
-  <Content
-    id="sobre-mi"
-    title="Sobre mí"
-    subtitle="Responsable de Área de TI en Sohipren S.A. (industria metalúrgica exportadora) desde 2021, con el objetivo de crecer hacia la dirección de áreas de TI."
-    items={[
-      {
-        title: 'Infraestructura y virtualización',
-        description:
-          'Diseñé e implementé la plataforma propia sobre Proxmox VE y Ceph, en reemplazo de VMware ESXi: compra de hardware, diseño de VLAN y conectividad entre nodos, y definición de servicios con alta disponibilidad.',
-      },
-      {
-        title: 'Backup y continuidad operativa',
-        description:
-          'Estrategia de backup y recuperación ante desastres con Veeam B&R y Proxmox Backup Server con réplica off-site, reduciendo de forma estimada el tiempo de restauración de ~22 horas a menos de 4 horas.',
-      },
-      {
-        title: 'Automatización con criterio determinista',
-        description:
-          'Desarrollo, con asistencia de IA, aplicaciones y automatizaciones para procesos de soporte (conciliación bancaria, instalación de PCs con USMT, redirección de carpetas). Uso soluciones deterministas, e IA solo donde aporta valor.',
-      },
-    ]}
-  />
+  <section class="ml-section" id="sobre-mi">
+    <div class="ml-container">
+      <div class="ml-section-head">
+        <div class="ml-eyebrow">Sobre mí</div>
+        <h2 class="ml-section-title">Infraestructura con criterio, no por moda</h2>
+        <p class="ml-lead">
+          Responsable de Área de TI en Sohipren S.A. (industria metalúrgica exportadora) desde 2021, con el objetivo
+          de crecer hacia la dirección de áreas de TI.
+        </p>
+      </div>
+      <div class="ml-grid-3 ml-reveal" data-ml-reveal>
+        {
+          aboutCards.map((card) => (
+            <div class="ml-card">
+              <div class="ml-card-icon" style={{ color: card.icon === 'shield' ? 'var(--ml-lime)' : 'var(--ml-accent)' }}>
+                {card.icon === 'rack' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <rect x="3" y="4" width="18" height="6" rx="1.5" />
+                    <rect x="3" y="14" width="18" height="6" rx="1.5" />
+                    <path d="M7 7h.01M7 17h.01" />
+                  </svg>
+                )}
+                {card.icon === 'shield' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M12 3l7 3v5c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z" />
+                    <path d="M9 12l2 2 4-4" />
+                  </svg>
+                )}
+                {card.icon === 'gear' && (
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                  </svg>
+                )}
+              </div>
+              <h3>{card.title}</h3>
+              <p>{card.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  {/* TRAYECTORIA EN SOHIPREN: PLAN ESTRATÉGICO 2021-2026 */}
-  <Steps
-    id="evolucion"
-    title="Plan Estratégico de TI 2021-2026"
-    subtitle="Hitos ejecutados en Sohipren S.A., sobre un plan que elaboré y vengo llevando adelante año a año."
-    items={[
-      {
-        title: '2021',
-        description:
-          'Actualización de S.O., infraestructura, microservicios, migración de dominio, políticas de backup, red profesional, seguridad del router, UPS para servidores y Veeam B&R.',
-        icon: 'tabler:calendar-event',
-      },
-      {
-        title: '2022',
-        description:
-          'Antivirus, banco de pruebas, migración de SQL, nuevo router, red del galpón, RemoteApp, seguridad de Gmail y desarrollo de scripts.',
-        icon: 'tabler:calendar-event',
-      },
-      {
-        title: '2023',
-        description:
-          'Docker Swarm, ERP web, GPO, red de fibra, seguridad contra dispositivos desconocidos, seguridad SSL y UPS grabado.',
-        icon: 'tabler:calendar-event',
-      },
-      {
-        title: '2024',
-        description:
-          'Infraestructura Proxmox, Proxmox Backup, aire acondicionado, UPS para PCs críticas, internet satelital Starlink, telefonía VoIP, desarrollo de scripts, planificación y capacitación en ciberseguridad.',
-        icon: 'tabler:calendar-event',
-      },
-      {
-        title: '2025',
-        description: 'Monitoreo de servidores críticos y migración de más de 50 VMs de servidores ESXi a Proxmox.',
-        icon: 'tabler:calendar-event',
-      },
-      {
-        title: '2026',
-        description:
-          'Instalación de VoIP con Issabel 5, instalación de Minio, instalación de Nextcloud, digitalización de documentos de armado y prueba, estabilización y modernización de infraestructura, gestión de programas de CNC, mejora de Wi-Fi, optimización de costos en dominios y certificados, Windows 11/licencias Office, app de soporte remoto y servicio de despliegue automático de PCs.',
-        icon: 'tabler:calendar-event',
-      },
-    ]}
-  />
+  <section class="ml-section" id="stack">
+    <div class="ml-container">
+      <div class="ml-section-head">
+        <div class="ml-eyebrow">Stack</div>
+        <h2 class="ml-section-title">Stack tecnológico</h2>
+        <p class="ml-lead">Las herramientas con las que trabajo día a día.</p>
+      </div>
+      <div class="ml-stack-filters">
+        {
+          stackCategories.map((c, i) => (
+            <button class:list={['ml-stack-filter', { 'is-active': i === 0 }]} data-ml-stack-filter={c} type="button">
+              {c}
+            </button>
+          ))
+        }
+      </div>
+      <div class="ml-stack-grid ml-reveal" data-ml-reveal>
+        {
+          stack.map((s) => (
+            <div class="ml-stack-card" data-ml-stack-card data-ml-cat={s.cat}>
+              <div class="ml-stack-badge">{s.abbr}</div>
+              <div>
+                <div class="ml-stack-name">{s.name}</div>
+                <div class="ml-stack-cat">{s.cat}</div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  {/* CASOS DOCUMENTADOS */}
-  <BlogLatestPosts
-    id="proyectos"
-    title="Casos documentados"
-    information="Problema, decisión y resultado de los proyectos de infraestructura que llevé adelante en Sohipren."
-  />
+  <section class="ml-section" id="evolucion">
+    <div class="ml-container">
+      <div class="ml-section-head">
+        <div class="ml-eyebrow" style="color:var(--ml-accent)">Trayectoria</div>
+        <h2 class="ml-section-title">Plan Estratégico de TI 2021–2026</h2>
+        <p class="ml-lead">
+          Hitos ejecutados en Sohipren S.A., sobre un plan que elaboré y vengo llevando adelante año a año.
+        </p>
+      </div>
+      <div class="ml-timeline ml-reveal" data-ml-reveal>
+        {
+          timeline.map((t) => (
+            <div class="ml-tl-row">
+              <div class="ml-tl-dot">{t.short}</div>
+              <div class="ml-tl-card">
+                <div class="ml-tl-card-top">
+                  <div class="ml-tl-year">{t.year}</div>
+                  <span class="ml-tl-badge">{t.status}</span>
+                </div>
+                <ul class="ml-tl-list">
+                  {t.items.map((it) => (
+                    <li>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 13l4 4L19 7" />
+                      </svg>
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  {/* EXPERIENCIA PREVIA */}
-  <Steps
-    title="Experiencia previa"
-    subtitle="Antes de Sohipren, en roles de gestión y consultoría de IT."
-    items={[
-      {
-        title: 'Sila Holding Industriale — IT Manager (2008–2009 y 2015–2016)',
-        description:
-          'Reportando a la dirección. Ahorro del 60% en costos de IT. Coordiné la implementación del ERP Protheus V.8 con Totvs.',
-        icon: 'tabler:briefcase',
-      },
-      {
-        title: 'ML Services & GFG Informática — Owner/Partner (2016–2021)',
-        description:
-          'Consultoría en virtualización VMware vSphere, redes, backup y seguridad. +30% de eficiencia y −40% de inactividad para clientes.',
-        icon: 'tabler:briefcase',
-      },
-      {
-        title: 'Hewlett-Packard — Information Security Consultant (2009–2011)',
-        description: 'Administración de accesos para clientes. Documentación adoptada a nivel global.',
-        icon: 'tabler:briefcase',
-      },
-    ]}
-  />
+  <section class="ml-section" id="proyectos">
+    <div class="ml-container">
+      <div class="ml-section-head">
+        <div class="ml-eyebrow">Proyectos</div>
+        <h2 class="ml-section-title">Casos documentados</h2>
+      </div>
+      <div class="ml-case-grid ml-reveal" data-ml-reveal>
+        {
+          casos.map((c) => (
+            <a class="ml-case-card" href={c.href}>
+              <div class="ml-case-img">
+                {c.image && (
+                  <Image
+                    src={c.image}
+                    alt={c.title}
+                    width={400}
+                    height={225}
+                    aspectRatio="16:9"
+                    layout="cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </div>
+              <div class="ml-case-body">
+                <h3>{c.title}</h3>
+                <p>{c.summary}</p>
+                {c.category && (
+                  <div class="ml-case-tags">
+                    <span class="ml-case-tag">{c.category}</span>
+                  </div>
+                )}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+      <a class="ml-see-all" href="/blog">
+        Ver todas las publicaciones
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          ><path d="M5 12h14M13 6l6 6-6 6"></path></svg
+        >
+      </a>
+    </div>
+  </section>
 
-  {/* FORMACIÓN */}
-  <Features
-    title="Formación y certificaciones"
-    items={[
-      {
-        title: 'Ingeniería en Sistemas de Información',
-        description: 'Universidad Tecnológica Nacional (UTN FRC) — en curso.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Administrador de Redes de Computadoras',
-        description: 'Universidad Tecnológica Nacional (UTN FRC) — 2015.',
-        icon: 'tabler:certificate',
-      },
-      {
-        title: 'Diplomatura en Gestión de Negocios',
-        description: 'Universidad Siglo 21 — en curso.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Ciencias de la Computación e Información',
-        description: 'Universidad Johann Wolfgang Goethe, Alemania (2001–2007).',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Cursos Platzi',
-        description:
-          'Fundamentos de Project Management (2025), Introducción a AWS (2023), Administración de Servidores Linux (2022), Fundamentos de Ingeniería de Software (2022), entre otros.',
-        icon: 'tabler:certificate',
-      },
-      {
-        title: 'Idiomas',
-        description: 'Español nativo, alemán fluido, portugués fluido, inglés B2.',
-        icon: 'tabler:language',
-      },
-    ]}
-  />
+  <section class="ml-section">
+    <div class="ml-container">
+      <div class="ml-section-head">
+        <div class="ml-eyebrow">Experiencia previa</div>
+        <h2 class="ml-section-title">Antes de Sohipren</h2>
+      </div>
+      <div class="ml-reveal" data-ml-reveal>
+        {
+          experiencia.map((e) => (
+            <div class="ml-exp-row">
+              <div>
+                <h3>{e.empresa}</h3>
+                <div class="ml-exp-meta">
+                  {e.cargo} · {e.anios}
+                </div>
+              </div>
+              <p>{e.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
-  {/* CONTACTO */}
-  <CallToAction
-    id="contacto"
-    title="¿Charlamos?"
-    subtitle="El contacto es a través de LinkedIn o GitHub."
-    actions={[
-      {
-        variant: 'primary',
-        text: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/martinlescano/',
-        target: '_blank',
-        icon: 'tabler:brand-linkedin',
-      },
-      {
-        variant: 'secondary',
-        text: 'GitHub',
-        href: 'https://github.com/mlescano',
-        target: '_blank',
-        icon: 'tabler:brand-github',
-      },
-    ]}
-  />
+  <section class="ml-section">
+    <div class="ml-container">
+      <div class="ml-section-head">
+        <div class="ml-eyebrow">Formación y certificaciones</div>
+        <h2 class="ml-section-title">Base académica y técnica</h2>
+      </div>
+      <div class="ml-grid-6 ml-reveal" data-ml-reveal>
+        {
+          formacion.map((f) => (
+            <div class="ml-edu-card">
+              <div class="ml-edu-top">
+                <div class="ml-edu-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 10L12 5 2 10l10 5 10-5z" />
+                    <path d="M6 12v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5" />
+                  </svg>
+                </div>
+                {f.status && <span class="ml-edu-badge">{f.status}</span>}
+              </div>
+              <h3>{f.titulo}</h3>
+              <p>{f.institucion}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="ml-section" id="contacto" style="border-bottom:none">
+    <div class="ml-container ml-contact-box">
+      <div class="ml-eyebrow" style="justify-content:center">Contacto</div>
+      <h2 style="margin-top:14px">¿Charlamos?</h2>
+      <div class="ml-contact-cards ml-reveal" data-ml-reveal>
+        <a class="ml-contact-card" href="https://www.linkedin.com/in/martinlescano/" target="_blank" rel="noopener">
+          <span class="ml-contact-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+              ><path
+                d="M4.98 3.5a2.5 2.5 0 11-.02 5.001A2.5 2.5 0 014.98 3.5zM3 9h4v12H3V9zm7 0h3.6v1.7h.05c.5-.95 1.75-1.95 3.6-1.95 3.85 0 4.55 2.5 4.55 5.75V21h-4v-5.6c0-1.35-.02-3.05-1.85-3.05-1.85 0-2.15 1.45-2.15 2.95V21h-4V9z"
+              ></path></svg
+            >
+          </span>
+          <span class="ml-contact-card-text">
+            <span class="ml-contact-card-label">LinkedIn</span>
+            <span class="ml-contact-card-value">
+              Ver perfil
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                ><path d="M7 17L17 7M7 7h10v10"></path></svg
+              >
+            </span>
+          </span>
+        </a>
+        <a class="ml-contact-card" href="https://github.com/mlescano" target="_blank" rel="noopener">
+          <span class="ml-contact-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+              ><path
+                d="M12 2a10 10 0 00-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.36 1.09 2.93.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.6 9.6 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.35 4.69-4.58 4.94.36.31.68.92.68 1.85v2.75c0 .26.18.57.69.48A10 10 0 0012 2z"
+              ></path></svg
+            >
+          </span>
+          <span class="ml-contact-card-text">
+            <span class="ml-contact-card-label">GitHub</span>
+            <span class="ml-contact-card-value">
+              Ver repositorios
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                ><path d="M7 17L17 7M7 7h10v10"></path></svg
+              >
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script>
+  const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-ml-stack-filter]');
+  const stackCards = document.querySelectorAll<HTMLElement>('[data-ml-stack-card]');
+
+  filterButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.getAttribute('data-ml-stack-filter');
+      filterButtons.forEach((b) => b.classList.toggle('is-active', b === btn));
+      stackCards.forEach((card) => {
+        const cat = card.getAttribute('data-ml-cat');
+        card.classList.toggle('is-hidden', filter !== 'Todo' && cat !== filter);
+      });
+    });
+  });
+
+  const revealEls = document.querySelectorAll<HTMLElement>('[data-ml-reveal]');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    revealEls.forEach((el) => observer.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('is-in'));
+  }
+</script>
+
+<style>
+  .ml-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ml-lime);
+  }
+  .ml-eyebrow::before {
+    content: '';
+    width: 16px;
+    height: 1px;
+    background: currentColor;
+  }
+  .ml-container {
+    max-width: 1180px;
+    margin-inline: auto;
+    padding-inline: 40px;
+  }
+  @media (max-width: 600px) {
+    .ml-container {
+      padding-inline: 20px;
+    }
+  }
+  .ml-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 26px;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition:
+      transform 0.15s ease,
+      opacity 0.15s ease;
+  }
+  .ml-btn:hover {
+    transform: translateY(-2px);
+  }
+  .ml-btn-solid {
+    background: var(--ml-lime);
+    color: var(--ml-lime-text);
+  }
+  .ml-btn-outline {
+    background: transparent;
+    color: var(--aw-color-text-default);
+    border-color: var(--ml-border-strong);
+  }
+  .ml-section {
+    padding-block: 96px;
+    border-bottom: 1px solid var(--ml-border);
+  }
+  @media (max-width: 900px) {
+    .ml-section {
+      padding-block: 64px;
+    }
+  }
+  .ml-section-head {
+    margin-bottom: 48px;
+    max-width: 720px;
+  }
+  h2.ml-section-title {
+    margin: 10px 0 0;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--aw-color-text-default);
+  }
+  @media (max-width: 600px) {
+    h2.ml-section-title {
+      font-size: 28px;
+    }
+  }
+  p.ml-lead {
+    margin: 16px 0 0;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--aw-color-text-muted);
+    max-width: 760px;
+  }
+
+  .ml-hero {
+    position: relative;
+    padding-top: 150px;
+    padding-bottom: 96px;
+    background-image: radial-gradient(var(--ml-dot) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    animation: ml-dot-drift 38s linear infinite;
+  }
+  @keyframes ml-dot-drift {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 28px 28px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ml-hero {
+      animation: none;
+    }
+  }
+  .ml-hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--aw-color-text-muted);
+    margin-bottom: 24px;
+  }
+  .ml-hero-greeting {
+    font-size: 16px;
+    color: var(--aw-color-text-muted);
+    margin-bottom: 4px;
+  }
+  .ml-hero h1 {
+    margin: 4px 0 8px;
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 1.02;
+    color: var(--aw-color-text-default);
+  }
+  @media (max-width: 600px) {
+    .ml-hero h1 {
+      font-size: 44px;
+    }
+  }
+  .ml-role {
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ml-accent);
+    margin-bottom: 28px;
+    letter-spacing: 0.02em;
+  }
+  p.ml-sub {
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--aw-color-text-muted);
+    max-width: 640px;
+    margin: 0 0 40px;
+  }
+  .ml-hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ml-hero-in {
+    animation: ml-hero-up 0.7s ease both;
+  }
+  @keyframes ml-hero-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ml-hero-in {
+      animation: none;
+    }
+  }
+  .ml-scroll-cue {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--aw-color-text-muted);
+  }
+  .ml-scroll-cue svg {
+    animation: ml-scroll-bounce 1.8s ease-in-out infinite;
+  }
+  @keyframes ml-scroll-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+  @media (max-width: 600px) {
+    .ml-scroll-cue {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ml-scroll-cue svg {
+      animation: none;
+    }
+  }
+
+  .ml-stats {
+    padding-block: 56px 0;
+  }
+  .ml-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--ml-border);
+    border: 1px solid var(--ml-border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  @media (max-width: 900px) {
+    .ml-stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .ml-stat {
+    background: var(--ml-bg-elev);
+    padding: 26px 24px;
+  }
+  .ml-stat-num {
+    font-size: 34px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: var(--aw-color-text-default);
+  }
+  .ml-stat-label {
+    font-size: 13px;
+    color: var(--aw-color-text-muted);
+    line-height: 1.4;
+  }
+
+  .ml-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .ml-grid-6 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .ml-grid-3,
+    .ml-grid-6 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .ml-grid-3,
+    .ml-grid-6 {
+      grid-template-columns: 1fr;
+    }
+  }
+  .ml-card {
+    background: var(--ml-bg-elev);
+    border: 1px solid var(--ml-border);
+    border-radius: 14px;
+    padding: 30px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ml-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--ml-lime);
+  }
+  .ml-card-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .ml-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: var(--aw-color-text-default);
+  }
+  .ml-card p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--aw-color-text-muted);
+    margin: 0;
+  }
+
+  .ml-stack-filters {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .ml-stack-filter {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--ml-border-strong);
+    background: transparent;
+    color: var(--aw-color-text-muted);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ml-stack-filter.is-active {
+    background: var(--ml-lime);
+    color: var(--ml-lime-text);
+    border-color: var(--ml-lime);
+  }
+  .ml-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .ml-stack-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .ml-stack-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .ml-stack-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--ml-bg-elev);
+    border: 1px solid var(--ml-border);
+    border-radius: 14px;
+    padding: 18px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ml-stack-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--ml-lime);
+  }
+  .ml-stack-card.is-hidden {
+    display: none;
+  }
+  .ml-stack-badge {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--ml-bg-elev-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--ml-accent);
+    flex-shrink: 0;
+  }
+  .ml-stack-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--aw-color-text-default);
+  }
+  .ml-stack-cat {
+    font-size: 11px;
+    color: var(--aw-color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 2px;
+  }
+
+  .ml-timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding-left: 28px;
+    border-left: 2px solid var(--ml-border);
+  }
+  @media (max-width: 600px) {
+    .ml-timeline {
+      padding-left: 20px;
+    }
+  }
+  .ml-tl-row {
+    position: relative;
+  }
+  .ml-tl-dot {
+    position: absolute;
+    left: -42px;
+    top: 22px;
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    background: var(--ml-bg-elev);
+    border: 2px solid var(--ml-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--ml-accent);
+  }
+  @media (max-width: 600px) {
+    .ml-tl-dot {
+      left: -34px;
+      width: 22px;
+      height: 22px;
+    }
+  }
+  .ml-tl-card {
+    background: var(--ml-bg-elev);
+    border: 1px solid var(--ml-border);
+    border-radius: 14px;
+    padding: 26px 28px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ml-tl-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--ml-accent);
+  }
+  .ml-tl-card-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .ml-tl-year {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--ml-accent);
+  }
+  .ml-tl-badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ml-accent);
+    border: 1px solid var(--ml-accent);
+    border-radius: 999px;
+    padding: 4px 12px;
+  }
+  .ml-tl-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .ml-tl-list li {
+    font-size: 15px;
+    color: var(--aw-color-text-muted);
+    padding-left: 26px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .ml-tl-list li svg {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: var(--ml-accent);
+  }
+
+  .ml-case-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 900px) {
+    .ml-case-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 600px) {
+    .ml-case-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .ml-case-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--ml-bg-elev);
+    border: 1px solid var(--ml-border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ml-case-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--ml-lime);
+  }
+  .ml-case-img {
+    height: 150px;
+    background: var(--ml-bg-elev-2);
+    border-bottom: 1px solid var(--ml-border);
+    overflow: hidden;
+  }
+  .ml-case-img :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .ml-case-body {
+    padding: 22px;
+  }
+  .ml-case-body h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    line-height: 1.3;
+    color: var(--aw-color-text-default);
+  }
+  .ml-case-body p {
+    font-size: 14px;
+    color: var(--aw-color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  .ml-case-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+  .ml-case-tag {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--aw-color-text-muted);
+    border: 1px solid var(--ml-border);
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+  .ml-see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--ml-lime);
+  }
+
+  .ml-exp-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 32px;
+    padding: 26px;
+    border: 1px solid var(--ml-border);
+    border-radius: 14px;
+    margin-bottom: 16px;
+    background: var(--ml-bg-elev);
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ml-exp-row:hover {
+    transform: translateY(-3px);
+    border-color: var(--ml-lime);
+  }
+  @media (max-width: 700px) {
+    .ml-exp-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  .ml-exp-row h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: var(--aw-color-text-default);
+  }
+  .ml-exp-meta {
+    font-size: 13px;
+    color: var(--ml-accent);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .ml-exp-row p {
+    font-size: 15px;
+    color: var(--aw-color-text-muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  .ml-edu-card {
+    background: var(--ml-bg-elev);
+    border: 1px solid var(--ml-border);
+    border-radius: 14px;
+    padding: 24px;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ml-edu-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--ml-lime);
+  }
+  .ml-edu-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .ml-edu-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--ml-bg-elev-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ml-accent);
+    flex-shrink: 0;
+  }
+  .ml-edu-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid var(--ml-lime);
+    color: var(--ml-lime);
+    border-radius: 999px;
+    padding: 4px 10px;
+    white-space: nowrap;
+  }
+  .ml-edu-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    line-height: 1.3;
+    color: var(--aw-color-text-default);
+  }
+  .ml-edu-card p {
+    font-size: 13px;
+    color: var(--aw-color-text-muted);
+    margin: 0;
+  }
+
+  .ml-contact-box {
+    text-align: center;
+    padding-block: 40px;
+  }
+  .ml-contact-box h2 {
+    font-size: 46px;
+    font-weight: 800;
+    margin-bottom: 28px;
+    color: var(--aw-color-text-default);
+  }
+  @media (max-width: 600px) {
+    .ml-contact-box h2 {
+      font-size: 32px;
+    }
+  }
+  .ml-contact-cards {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .ml-contact-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 26px;
+    background: var(--ml-bg-elev);
+    border: 1px solid var(--ml-border);
+    border-radius: 14px;
+    min-width: 230px;
+    text-align: left;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .ml-contact-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--ml-lime);
+  }
+  .ml-contact-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: var(--ml-bg-elev-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ml-lime);
+    flex-shrink: 0;
+  }
+  .ml-contact-card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .ml-contact-card-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--aw-color-text-muted);
+  }
+  .ml-contact-card-value {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--aw-color-text-default);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .ml-reveal > :global(*) {
+    opacity: 0.5;
+    transform: translateY(18px);
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s ease;
+  }
+  .ml-reveal.is-in > :global(*) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ml-reveal > :global(*) {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+</style>
