@@ -52,3 +52,23 @@ const metadata = merge(
   <ToBlogLink />
   <RelatedPosts post={post} />
 </Layout>
+
+<script>
+  const revealEls = document.querySelectorAll<HTMLElement>('[data-ml-reveal]');
+  if ('IntersectionObserver' in window && revealEls.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    revealEls.forEach((el) => observer.observe(el));
+  } else {
+    revealEls.forEach((el) => el.classList.add('is-in'));
+  }
+</script>

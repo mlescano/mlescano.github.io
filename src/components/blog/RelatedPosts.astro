@@ -2,9 +2,10 @@
 import { APP_BLOG } from 'astrowind:config';
 
 import { getRelatedPosts } from '~/utils/blog';
-import BlogHighlightedPosts from '../widgets/BlogHighlightedPosts.astro';
+import Image from '~/components/common/Image.astro';
+import { findImage } from '~/utils/images';
+import { getBlogPermalink, getPermalink } from '~/utils/permalinks';
 import type { Post } from '~/types';
-import { getBlogPermalink } from '~/utils/permalinks';
 
 export interface Props {
   post: Post;
@@ -13,19 +14,65 @@ export interface Props {
 const { post } = Astro.props;
 
 const relatedPosts = post.tags ? await getRelatedPosts(post, 4) : [];
+const posts = await Promise.all(
+  relatedPosts.map(async (p) => ({
+    title: p.title,
+    summary: p.excerpt,
+    href: getPermalink(p.permalink, 'post'),
+    image: await findImage(p.image),
+    tags: p.tags ?? [],
+    featured: p.featured ?? false,
+  }))
+);
 ---
 
 {
-  APP_BLOG.isRelatedPostsEnabled ? (
-    <BlogHighlightedPosts
-      classes={{
-        container:
-          'pt-0 lg:pt-0 md:pt-0 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
-      }}
-      title="Publicaciones relacionadas"
-      linkText="Ver todas las publicaciones"
-      linkUrl={getBlogPermalink()}
-      postIds={relatedPosts.map((post) => post.id)}
-    />
-  ) : null
+  APP_BLOG.isRelatedPostsEnabled && posts.length > 0 && (
+    <section class="ml-section">
+      <div class="ml-container-narrow">
+        <div class="ml-section-head">
+          <div class="ml-eyebrow">Seguir leyendo</div>
+          <h2 class="ml-section-title">Publicaciones relacionadas</h2>
+        </div>
+        <div class="ml-case-grid-3 ml-reveal" data-ml-reveal>
+          {posts.map((p) => (
+            <a class="ml-case-card" href={p.href}>
+              {p.featured && <span class="ml-case-badge">Destacado</span>}
+              <div class="ml-case-img">
+                {p.image && (
+                  <Image
+                    src={p.image}
+                    alt={p.title}
+                    width={400}
+                    height={225}
+                    aspectRatio="16:9"
+                    layout="cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </div>
+              <div class="ml-case-body">
+                <h3>{p.title}</h3>
+                <p>{p.summary}</p>
+                {p.tags && p.tags.length > 0 && (
+                  <div class="ml-case-tags">
+                    {p.tags.map((tag) => (
+                      <span class="ml-case-tag">{tag.title}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+        <a class="ml-see-all" href={getBlogPermalink()}>
+          Ver todas las publicaciones
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+    </section>
+  )
 }

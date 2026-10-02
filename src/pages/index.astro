@@ -260,9 +260,9 @@ const casos = await Promise.all(
         >
         Córdoba, Argentina
       </div>
-      <div class="ml-hero-greeting ml-hero-in" style="animation-delay:80ms">Hola, soy</div>
+      <div class="ml-hero-greeting ml-hero-in" style="animation-delay:80ms">Portafolio de</div>
       <h1 class="ml-hero-in" style="animation-delay:160ms">Martín Lescano</h1>
-      <div class="ml-role ml-hero-in" style="animation-delay:240ms">// Responsable de Área de TI</div>
+      <div class="ml-role ml-hero-in" style="animation-delay:240ms">Responsable de Área de TI</div>
       <p class="ml-sub ml-hero-in" style="animation-delay:320ms">
         Liderazgo técnico y estrategia en infraestructura resiliente: Proxmox, Ceph y alta disponibilidad, con un
         criterio claro de soluciones deterministas y automatización donde aporta valor real.
@@ -372,7 +372,7 @@ const casos = await Promise.all(
   </section>
 
   <section class="ml-section" id="evolucion">
-    <div class="ml-container">
+    <div class="ml-container-narrow">
       <div class="ml-section-head">
         <div class="ml-eyebrow" style="color:var(--ml-accent)">Trayectoria</div>
         <h2 class="ml-section-title">Plan Estratégico de TI 2021–2026</h2>
@@ -384,7 +384,7 @@ const casos = await Promise.all(
         {
           timeline.map((t) => (
             <div class="ml-tl-row">
-              <div class="ml-tl-dot">{t.short}</div>
+              <div class="ml-tl-dot" />
               <div class="ml-tl-card">
                 <div class="ml-tl-card-top">
                   <div class="ml-tl-year">{t.year}</div>
@@ -473,10 +473,10 @@ const casos = await Promise.all(
   </section>
 
   <section class="ml-section">
-    <div class="ml-container">
+    <div class="ml-container-narrow">
       <div class="ml-section-head">
         <div class="ml-eyebrow">Experiencia previa</div>
-        <h2 class="ml-section-title">Antes de Sohipren</h2>
+        <h2 class="ml-section-title">Roles anteriores</h2>
       </div>
       <div class="ml-reveal" data-ml-reveal>
         {
