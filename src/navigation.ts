@@ -7,7 +7,7 @@ export const headerData = {
     { text: 'Trayectoria', href: '#evolucion' },
     { text: 'Proyectos', href: '#proyectos' },
   ],
-  actions: [{ text: 'Contacto', href: 'mailto:m.h.lescano@gmail.com' }],
+  actions: [{ text: 'Contacto', href: '#contacto' }],
 };
 
 export const footerData = {
@@ -18,9 +18,8 @@ export const footerData = {
   socialLinks: [
     { ariaLabel: 'Github', icon: 'tabler:brand-github', href: 'https://github.com/mlescano' },
     { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://www.linkedin.com/in/martinlescano/' },
-    
   ],
   footNote: `
-    © 2026 Martín Lescano · Especialista en Infraestructura IT
+    © 2026 Martín Lescano · Responsable de Área de TI
   `,
 };

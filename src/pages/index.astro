@@ -5,108 +5,214 @@ import Content from '~/components/widgets/Content.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Features from '~/components/widgets/Features.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Martín Lescano | Coordinador de Sistemas y Arquitecto de Soluciones IT',
+  title: 'Martín Lescano | Responsable de Área de TI',
+  ignoreTitleTemplate: true,
 };
+
+const heroNetworkImage = `
+<svg viewBox="0 0 800 450" class="w-full rounded-md shadow-lg" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Red de nodos de infraestructura">
+  <rect width="800" height="450" rx="16" fill="#0b0f14" />
+  <g stroke="#8ace25" stroke-width="1.4" opacity="0.55">
+    <line x1="120" y1="110" x2="300" y2="90" />
+    <line x1="300" y1="90" x2="470" y2="150" />
+    <line x1="300" y1="90" x2="260" y2="230" />
+    <line x1="470" y1="150" x2="640" y2="120" />
+    <line x1="470" y1="150" x2="520" y2="300" />
+    <line x1="260" y1="230" x2="130" y2="300" />
+    <line x1="260" y1="230" x2="420" y2="310" />
+    <line x1="420" y1="310" x2="520" y2="300" />
+    <line x1="520" y1="300" x2="670" y2="330" />
+    <line x1="130" y1="300" x2="220" y2="380" />
+    <line x1="420" y1="310" x2="360" y2="390" />
+    <line x1="640" y1="120" x2="690" y2="230" />
+    <line x1="690" y1="230" x2="670" y2="330" />
+  </g>
+  <g fill="#8ace25">
+    <circle cx="120" cy="110" r="5" />
+    <circle cx="300" cy="90" r="6" />
+    <circle cx="470" cy="150" r="7" />
+    <circle cx="640" cy="120" r="5" />
+    <circle cx="260" cy="230" r="6" />
+    <circle cx="690" cy="230" r="5" />
+    <circle cx="130" cy="300" r="5" />
+    <circle cx="420" cy="310" r="6" />
+    <circle cx="520" cy="300" r="7" />
+    <circle cx="670" cy="330" r="5" />
+    <circle cx="220" cy="380" r="5" />
+    <circle cx="360" cy="390" r="5" />
+  </g>
+</svg>
+`;
 ---
 
 <Layout metadata={metadata}>
-  {/* HERO: PRESENTACIÓN DE IMPACTO */}
+  {/* HERO */}
   <Hero
     actions={[
-      { variant: 'primary', text: 'Ver Proyectos', href: '#proyectos' },
-      { text: 'Sobre mí', href: '#sobre-mi' },
+      { variant: 'primary', text: 'Ver casos', href: '#proyectos' },
+      { text: 'Contacto', href: '#contacto' },
     ]}
-    image={{ src: '~/assets/images/apple-touch-icon.png', alt: 'Logo Martín Lescano' }}
+    image={heroNetworkImage}
   >
     <Fragment slot="title">
-      Martín Lescano <br /> 
-      <span class="text-primary">Coordinador de Sistemas y Arquitecto de Soluciones IT</span>
+      Martín Lescano <br />
+      <span class="text-primary">Responsable de Área de TI</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Más de una década diseñando y gestionando ecosistemas digitales críticos. Mi enfoque no es solo administrar servidores, sino garantizar la soberanía tecnológica y la continuidad operativa. He liderado la transformación de infraestructuras obsoletas hacia arquitecturas híbridas de alto rendimiento, optimizando costos y escalabilidad mediante virtualización de código abierto.
+      Liderazgo técnico y estrategia en infraestructura resiliente: Proxmox, Ceph y alta disponibilidad, con un
+      criterio claro de soluciones deterministas y automatización donde aporta valor real.
     </Fragment>
   </Hero>
 
- {/* SOBRE MÍ: TRAYECTORIA PROFESIONAL (LinkedIn Refined) */}
+  {/* SOBRE MÍ */}
   <Content
     id="sobre-mi"
-    title="Trayectoria y Visión"
-    subtitle="Formado en la Universidad Tecnológica Nacional (UTN), he liderado la evolución tecnológica en diversos sectores estratégicos."
+    title="Sobre mí"
+    subtitle="Responsable de Área de TI en Sohipren S.A. (industria metalúrgica exportadora) desde 2021, con el objetivo de crecer hacia la dirección de áreas de TI."
     items={[
       {
-        title: 'Liderazgo en Infraestructura',
-        description: 'Especialista en la transición de entornos legacy (ESXi/Hyper-V) hacia arquitecturas modernas y resilientes. Capacidad demostrada para gestionar presupuestos tecnológicos y liderar equipos hacia la excelencia operativa.',
+        title: 'Infraestructura y virtualización',
+        description:
+          'Diseñé e implementé la plataforma propia sobre Proxmox VE y Ceph, en reemplazo de VMware ESXi: compra de hardware, diseño de VLAN y conectividad entre nodos, y definición de servicios con alta disponibilidad.',
       },
       {
-        title: 'Soberanía y Seguridad',
-        description: 'Defensor de soluciones que garantizan el control total sobre los datos. Diseño infraestructuras protegidas, escalables y optimizadas bajo estándares internacionales de seguridad.',
+        title: 'Backup y continuidad operativa',
+        description:
+          'Estrategia de backup y recuperación ante desastres con Veeam B&R y Proxmox Backup Server con réplica off-site, reduciendo de forma estimada el tiempo de restauración de ~22 horas a menos de 4 horas.',
+      },
+      {
+        title: 'Automatización con criterio determinista',
+        description:
+          'Desarrollo, con asistencia de IA, aplicaciones y automatizaciones para procesos de soporte (conciliación bancaria, instalación de PCs con USMT, redirección de carpetas). Uso soluciones deterministas, e IA solo donde aporta valor.',
       },
     ]}
   />
 
-  {/* EVOLUCIÓN TÉCNICA Y ROLES (Resumen de Experiencia) */}
+  {/* TRAYECTORIA EN SOHIPREN: PLAN ESTRATÉGICO 2021-2026 */}
   <Steps
     id="evolucion"
-    title="🚀 Hitos de Trayectoria (LinkedIn)"
+    title="Plan Estratégico de TI 2021-2026"
+    subtitle="Hitos ejecutados en Sohipren S.A., sobre un plan que elaboré y vengo llevando adelante año a año."
     items={[
       {
-        title: '2024 - Actualidad: Líder de Infraestructura (Sector Privado)',
-        description: `
-          • <strong>Modernización de Datacenter:</strong> Migración integral de 50+ VMs hacia cluster Proxmox VE con Ceph (NVMe).<br />
-          • <strong>IA Local:</strong> Despliegue de modelos LLM sobre Docker para digitalización inteligente de procesos productivos.<br />
-          • <strong>Estrategia de Backup:</strong> Implementación de Proxmox Backup Server con replicación off-site.
-        `,
+        title: '2021',
+        description:
+          'Actualización de sistemas operativos, migración de dominio, políticas de backup con Veeam B&R, red profesional, seguridad del router y UPS.',
+        icon: 'tabler:calendar-event',
+      },
+      {
+        title: '2022',
+        description:
+          'Migración de SQL, RemoteApp, banco de pruebas, nuevo router, red de fibra, red del galpón y antivirus.',
+        icon: 'tabler:calendar-event',
+      },
+      {
+        title: '2023',
+        description: 'Docker Swarm, ERP web, GPO, seguridad contra dispositivos desconocidos y seguridad SSL.',
+        icon: 'tabler:calendar-event',
+      },
+      {
+        title: '2024',
+        description:
+          'Migración a Proxmox VE y Ceph con más de 50 VMs, Proxmox Backup Server, telefonía VoIP sobre Issabel 5, internet satelital Starlink y aplicaciones de producción propias.',
+        icon: 'tabler:calendar-event',
+      },
+    ]}
+  />
+
+  {/* CASOS DOCUMENTADOS */}
+  <BlogLatestPosts
+    id="proyectos"
+    title="Casos documentados"
+    information="Problema, decisión y resultado de los proyectos de infraestructura que llevé adelante en Sohipren."
+  />
+
+  {/* EXPERIENCIA PREVIA */}
+  <Steps
+    title="Experiencia previa"
+    subtitle="Antes de Sohipren, en roles de gestión y consultoría de IT."
+    items={[
+      {
+        title: 'Sila Holding Industriale — IT Manager (2008–2009 y 2015–2016)',
+        description:
+          'Reportando a la dirección. Ahorro del 60% en costos de IT. Coordiné la implementación del ERP Protheus V.8 con Totvs.',
         icon: 'tabler:briefcase',
       },
       {
-        title: '2021 - 2023: Responsable IT & Comunicaciones (Sector Industrial)',
-        description: `
-          • <strong>Voz sobre IP:</strong> Transición total a telefonía Issabel 5 sobre contenedores, integrando múltiples sedes.<br />
-          • <strong>Observabilidad:</strong> Centralización de activos con GLPI y gestión fuera de banda mediante MeshCentral.<br />
-          • <strong>Optimización de Recursos:</strong> Consolidación de servidores físicos en entornos virtuales, reduciendo costos energéticos en un 30%.
-        `,
-        icon: 'tabler:settings',
+        title: 'ML Services & GFG Informática — Owner/Partner (2016–2021)',
+        description:
+          'Consultoría en virtualización VMware vSphere, redes, backup y seguridad. +30% de eficiencia y −40% de inactividad para clientes.',
+        icon: 'tabler:briefcase',
       },
       {
-        title: 'Anteriormente: Soporte de Infraestructura & Administración (Sectores Diversos)',
-        description: `
-          • Gestión de redes empresariales basadas en Unifi y segmentación avanzada por VLANs.<br />
-          • Implementación de nubes privadas (Nextcloud/Minio) para colaboración segura de equipos remotos.<br />
-          • Administración de sistemas Windows Server y Linux en alta disponibilidad.
-        `,
-        icon: 'tabler:history',
+        title: 'Hewlett-Packard — Information Security Consultant (2009–2011)',
+        description: 'Administración de accesos para clientes. Documentación adoptada a nivel global.',
+        icon: 'tabler:briefcase',
       },
     ]}
   />
 
-  {/* PROYECTOS DESTACADOS */}
-  <BlogLatestPosts
-    id="proyectos"
-    title="🛠️ Casos de Éxito Documentados"
-    information="Implementaciones técnicas donde la automatización y la arquitectura definieron el éxito del proyecto."
-  />
-
-  {/* FORMACIÓN ACADÉMICA */}
+  {/* FORMACIÓN */}
   <Features
-    title="Formación & Certificaciones"
+    title="Formación y certificaciones"
     items={[
       {
-        title: 'Universidad Tecnológica Nacional (UTN)',
-        description: 'Bases de ingeniería y redes. Enfoque analítico para la resolución de problemas complejos.',
+        title: 'Ingeniería en Sistemas de Información',
+        description: 'Universidad Tecnológica Nacional (UTN FRC) — en curso.',
         icon: 'tabler:school',
       },
       {
-        title: 'Administración de Sistemas Avanzada',
-        description: 'Especializaciones constantes en virtualización de código abierto, seguridad perimetral y automatización.',
+        title: 'Administrador de Redes de Computadoras',
+        description: 'Universidad Tecnológica Nacional (UTN FRC) — 2015.',
         icon: 'tabler:certificate',
       },
       {
-        title: 'Gestión de Proyectos IT',
-        description: 'Metodologías para la entrega eficiente de servicios e infraestructura bajo demanda.',
+        title: 'Diplomatura en Gestión de Negocios',
+        description: 'Universidad Siglo 21 — en curso.',
         icon: 'tabler:template',
+      },
+      {
+        title: 'Ciencias de la Computación e Información',
+        description: 'Universidad Johann Wolfgang Goethe, Alemania (2001–2007).',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Cursos Platzi',
+        description:
+          'Fundamentos de Project Management (2025), Introducción a AWS (2023), Administración de Servidores Linux (2022), Fundamentos de Ingeniería de Software (2022), entre otros.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Idiomas',
+        description: 'Español nativo, alemán fluido, portugués fluido, inglés B2.',
+        icon: 'tabler:language',
+      },
+    ]}
+  />
+
+  {/* CONTACTO */}
+  <CallToAction
+    id="contacto"
+    title="¿Charlamos?"
+    subtitle="El contacto es a través de LinkedIn o GitHub."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'LinkedIn',
+        href: 'https://www.linkedin.com/in/martinlescano/',
+        target: '_blank',
+        icon: 'tabler:brand-linkedin',
+      },
+      {
+        variant: 'secondary',
+        text: 'GitHub',
+        href: 'https://github.com/mlescano',
+        target: '_blank',
+        icon: 'tabler:brand-github',
       },
     ]}
   />
