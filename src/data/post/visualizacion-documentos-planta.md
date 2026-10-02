@@ -10,6 +10,6 @@ Eliminar la dependencia del papel y los errores por versiones obsoletas de docum
 
 ### La Solución
 Despliegue de un sistema de visualización centralizado:
-* **Acceso:** Terminales industriales con acceso a la intranet corporativa.
-* **Gestión:** Integración con el gestor de archivos on-premise para asegurar que el operario siempre vea la última versión del plano.
-* **Impacto:** Mejora del 100% en la trazabilidad documental y reducción de desperdicios por errores de armado.
+* **Acceso:** Terminales en planta con acceso a la red interna.
+* **Gestión:** Integración con el almacenamiento de objetos on-premise (Minio) para asegurar que el operario siempre vea la última versión del plano.
+* **Impacto:** Mejora en la trazabilidad documental y reducción de errores de armado por versiones obsoletas de planos.

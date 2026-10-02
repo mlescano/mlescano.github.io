@@ -9,6 +9,6 @@ category: Gestión
 Centralizar el inventario técnico y el soporte remoto con administración fuera de banda para servidores y terminales.
 
 ### La Solución
-Integré **GLPI** para la gestión de tickets e inventario automático con **MeshCentral** para el control remoto seguro.
+Integré **GLPI** para la gestión de tickets e inventario de activos con **MeshCentral** para el control y soporte remoto fuera de banda.
 
-**Resultado:** Logré un SLA de respuesta ante incidentes inferior a **15 minutos** en el 90% de los casos.
+**Resultado:** Visibilidad centralizada del parque de equipos y soporte remoto más rápido, sin depender de la presencia física en cada puesto.

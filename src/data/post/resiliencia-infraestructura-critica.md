@@ -6,7 +6,7 @@ image: "~/assets/images/resiliencia-it.png"
 category: Infraestructura
 ---
 ### Resumen del Proyecto
-En 2021, lideré la estabilización del núcleo tecnológico implementando:
+En 2021, llevé adelante la estabilización del núcleo tecnológico implementando:
 * **Seguridad:** Hardening de Routers y segmentación de red profesional.
 * **Continuidad:** Instalación de sistemas UPS para servidores y políticas de backup robustas con **Veeam B&R**.
 * **Modernización:** Actualización completa de S.O. y migración de dominios para asegurar la compatibilidad futura.

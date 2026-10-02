@@ -10,6 +10,6 @@ Asegurar que la nueva infraestructura de virtualización tuviera un sistema de r
 
 ### La Solución
 Integración nativa de **Proxmox Backup Server (PBS)** con el cluster PVE:
-* **Deduplicación:** Reducción masiva del espacio de almacenamiento necesario para backups.
-* **Seguridad:** Backups incrementales y encriptados con verificación de integridad.
-* **Resultado:** Garantía de continuidad del negocio con tiempos de recuperación (RTO) optimizados al máximo.
+* **Deduplicación:** Reducción del espacio de almacenamiento necesario para los backups.
+* **Seguridad:** Backups incrementales con verificación de integridad y réplica off-site.
+* **Resultado:** Para el servidor más grande (50 GB de SO + 500 GB de datos, 250 GB de base de datos), el tiempo de restauración estimado bajó de ~22 horas (con la infraestructura anterior) a menos de 4 horas.

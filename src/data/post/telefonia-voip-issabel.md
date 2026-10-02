@@ -6,4 +6,4 @@ image: "~/assets/images/voip-issabel.png"
 category: Infraestructura
 ---
 ### Detalle Técnico
-Sustitución de sistemas analógicos por una infraestructura **VoIP basada en Issabel 5**. Este proyecto incluyó la configuración de troncales, seguridad SSL para comunicaciones y la integración de terminales móviles para usuarios remotos. El proyecto se baso en implementacion interna con salida troncal, pero estableció la base para extenderla al exterior en un futuro.
+Sustitución de sistemas analógicos por una infraestructura **VoIP basada en Issabel 5** sobre contenedores. El proyecto incluyó la configuración de troncales y seguridad SSL para las comunicaciones, con una implementación interna que dejó la base lista para una futura extensión.

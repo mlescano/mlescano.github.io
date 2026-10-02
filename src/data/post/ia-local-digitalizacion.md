@@ -1,12 +1,16 @@
 ---
 publishDate: 2026-04-05T00:00:00Z
-title: "IA Local: Digitalización y Búsqueda Semántica"
-excerpt: "Despliegue de modelos LLM privados sobre Docker o VM en proxmox para optimización de procesos y OCR interno/data entry a ERP."
+title: "IA Local: Prueba de Concepto con Ollama"
+excerpt: "Pruebas de concepto con modelos LLM locales para evaluar dónde la IA aporta valor real frente a una solución determinista."
 image: "~/assets/images/ia-local.png"
 category: Innovación
 ---
+
 ### El Desafío
-Implementar capacidades de IA Generativa manteniendo la privacidad absoluta de los datos sensibles en el datacenter local.
+Evaluar si la IA generativa local podía aportar valor a procesos de soporte, sin depender de servicios en la nube ni comprometer datos sensibles.
 
 ### La Solución
-Despliegue de **LLMs (Large Language Models)** on-premise mediante **Docker**, enfocados en la digitalización de documentos y consultas internas seguras.
+Pruebas de concepto con **Ollama** en equipo propio, para entender el comportamiento de modelos LLM locales antes de considerar cualquier uso en procesos reales.
+
+### Criterio
+Mi criterio de trabajo es usar **soluciones deterministas siempre que sea posible, y recurrir a IA solo donde realmente aporta**. Estas pruebas de concepto son la base para decidir, caso por caso, si vale la pena ir más allá.

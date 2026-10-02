@@ -12,4 +12,4 @@ Organizar un departamento de IT que carecía de procesos estandarizados y visió
 Desarrollé un plan maestro centrado en:
 * **Auditoría Inicial:** Diagnóstico profundo de hardware, software y seguridad.
 * **Priorización:** Establecimiento de fases de ejecución (Estabilización, Modernización e Innovación).
-* **Resultado:** Una hoja de ruta clara que permitió ejecutar con éxito proyectos complejos en los años siguientes (2022-2026).
+* **Resultado:** Una hoja de ruta clara que permitió ejecutar con éxito proyectos complejos en los años siguientes (2022-2024).
