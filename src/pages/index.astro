@@ -57,6 +57,7 @@ const stack = [
 const timeline = [
   {
     year: '2021',
+    titulo: 'Continuidad del Negocio',
     short: '01',
     status: 'Completado',
     items: [
@@ -74,6 +75,7 @@ const timeline = [
   },
   {
     year: '2022',
+    titulo: 'Seguridad de la Información',
     short: '02',
     status: 'Completado',
     items: [
@@ -90,6 +92,7 @@ const timeline = [
   },
   {
     year: '2023',
+    titulo: 'Transformación Digital',
     short: '03',
     status: 'Completado',
     items: [
@@ -104,6 +107,7 @@ const timeline = [
   },
   {
     year: '2024',
+    titulo: 'Transformación Digital',
     short: '04',
     status: 'Completado',
     items: [
@@ -121,6 +125,7 @@ const timeline = [
   },
   {
     year: '2025',
+    titulo: 'Continuidad del Negocio',
     short: '05',
     status: 'Completado',
     items: ['Monitoreo de servidores críticos', 'Migración de más de 50 VMs de servidores ESXi a Proxmox'],
@@ -128,6 +133,7 @@ const timeline = [
   },
   {
     year: '2026',
+    titulo: 'Soporte a la Innovación',
     short: '06',
     status: 'En curso',
     items: [
@@ -386,9 +392,12 @@ const casos = await Promise.all(
             <div class="ml-tl-row">
               <div class="ml-tl-dot" />
               <div class="ml-tl-card">
-                <div class="ml-tl-card-top">
-                  <div class="ml-tl-year">{t.year}</div>
-                  <span class="ml-tl-badge">{t.status}</span>
+                <div class="ml-exp-top">
+                  <div>
+                    <h3>{t.titulo}</h3>
+                    <div class="ml-exp-meta">{t.year}</div>
+                  </div>
+                  <span class="ml-exp-period">{t.status}</span>
                 </div>
                 <div class="ml-tl-eyebrow">Logros clave</div>
                 <ul class="ml-tl-list">
