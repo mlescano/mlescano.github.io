@@ -1,6 +1,6 @@
 site:
   name: Martín Lescano
-  site: 'https://mlescano.github.io'
+  site: 'https://martinlescano.com.ar'
   base: '/'
   trailingSlash: false
 
@@ -11,8 +11,8 @@ site:
 metadata:
   title:
     default: Martín Lescano
-    template: '%s - Portfolio'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+    template: '%s - Martín Lescano'
+  description: 'Responsable de Área de TI especializado en virtualización e infraestructura resiliente: Proxmox, Ceph y alta disponibilidad.'
   robots:
     index: true
     follow: true
@@ -24,12 +24,10 @@ metadata:
         height: 628
     type: website
   twitter:
-    handle: '@arthelokyo'
-    site: '@arthelokyo'
     cardType: summary_large_image
 
 i18n:
-  language: en
+  language: es
   textDirection: ltr
 
 apps:
