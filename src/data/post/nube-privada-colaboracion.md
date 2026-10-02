@@ -4,6 +4,11 @@ title: "Almacenamiento de Objetos On-Premise con Minio"
 excerpt: "Evaluación de dos alternativas de almacenamiento privado y adopción de Minio como backend de objetos."
 image: "~/assets/images/cloud-privada.png"
 category: Infraestructura
+tags: ["Minio", "S3 compatible"]
+highlights:
+  - "Evaluación de Nextcloud vs. Minio"
+  - "Minio en producción, Nextcloud descartado"
+  - "Sin costos de licenciamiento"
 ---
 
 ### El Desafío

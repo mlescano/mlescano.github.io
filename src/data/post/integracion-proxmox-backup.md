@@ -4,6 +4,11 @@ title: "Ecosistema Proxmox: Integración de PBS"
 excerpt: "Implementación de Proxmox Backup Server para garantizar la integridad y recuperación de datos crítica."
 image: "~/assets/images/proxmox-backup.png"
 category: Infraestructura
+tags: ["Proxmox Backup Server", "Veeam B&R"]
+highlights:
+  - "Backups incrementales con verificación de integridad"
+  - "Réplica off-site"
+  - "Restauración estimada en menos de 4 horas (antes ~22h)"
 ---
 ### El Desafío
 Asegurar que la nueva infraestructura de virtualización tuviera un sistema de respaldo de nivel empresarial, rápido y eficiente.

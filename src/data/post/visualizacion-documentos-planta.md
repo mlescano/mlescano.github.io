@@ -4,6 +4,11 @@ title: "Digitalización: Visualización en Planta"
 excerpt: "Implementación de terminales para acceso instantáneo a planos y documentos técnicos en áreas de producción."
 image: "~/assets/images/visualizacion-planta.png"
 category: Innovación
+tags: ["Minio", "Terminales industriales"]
+highlights:
+  - "Terminales en planta con acceso a la red interna"
+  - "Integración con almacenamiento Minio"
+  - "Menos errores por versiones obsoletas de planos"
 ---
 ### El Desafío
 Eliminar la dependencia del papel y los errores por versiones obsoletas de documentos en las áreas de armado y prueba.

@@ -70,6 +70,7 @@ const timeline = [
       'UPS para servidores',
       'Veeam B&R',
     ],
+    tags: ['Veeam B&R', 'Windows Server'],
   },
   {
     year: '2022',
@@ -85,6 +86,7 @@ const timeline = [
       'Seguridad de Gmail',
       'Desarrollo de scripts',
     ],
+    tags: ['SQL Server', 'RemoteApp'],
   },
   {
     year: '2023',
@@ -98,6 +100,7 @@ const timeline = [
       'Seguridad SSL',
       'UPS grabado',
     ],
+    tags: ['Docker Swarm', 'GPO'],
   },
   {
     year: '2024',
@@ -114,12 +117,14 @@ const timeline = [
       'Planificación',
       'Capacitación en ciberseguridad',
     ],
+    tags: ['Proxmox VE', 'Starlink'],
   },
   {
     year: '2025',
     short: '05',
     status: 'Completado',
     items: ['Monitoreo de servidores críticos', 'Migración de más de 50 VMs de servidores ESXi a Proxmox'],
+    tags: ['Proxmox VE', 'Ceph'],
   },
   {
     year: '2026',
@@ -137,6 +142,7 @@ const timeline = [
       'App de soporte remoto',
       'Servicio de despliegue automático de PCs',
     ],
+    tags: ['Issabel 5', 'Minio'],
   },
 ];
 
@@ -145,19 +151,63 @@ const experiencia = [
     empresa: 'Sila Holding Industriale',
     cargo: 'IT Manager',
     anios: '2008–2009 y 2015–2016',
-    desc: 'Reportando a la dirección. Ahorro del 60% en costos de IT. Coordiné la implementación del ERP Protheus V.8 con Totvs.',
+    logros: [
+      'Reportando directamente a la dirección',
+      'Ahorro del 60% en costos de IT',
+      'Coordinación de la implementación del ERP Protheus V.8 con Totvs',
+    ],
+    tags: ['ERP Protheus', 'Gestión de IT'],
   },
   {
     empresa: 'ML Services & GFG Informática',
     cargo: 'Owner/Partner',
     anios: '2016–2021',
-    desc: 'Consultoría en virtualización VMware vSphere, redes, backup y seguridad. +30% de eficiencia y −40% de inactividad para clientes.',
+    logros: [
+      'Consultoría en virtualización, redes, backup y seguridad',
+      '+30% de eficiencia para clientes',
+      '−40% de inactividad para clientes',
+    ],
+    tags: ['VMware vSphere', 'Redes', 'Backup', 'Seguridad'],
   },
   {
     empresa: 'Hewlett-Packard',
     cargo: 'Information Security Consultant',
     anios: '2009–2011',
-    desc: 'Administración de accesos para clientes. Documentación adoptada a nivel global.',
+    logros: ['Administración de accesos para clientes', 'Documentación adoptada a nivel global'],
+    tags: ['Gestión de accesos', 'Documentación técnica'],
+  },
+];
+
+const habilidades = [
+  {
+    titulo: 'Coordinación de proveedores',
+    desc: 'Gestiono proveedores de ERP, control horario, VoIP y conectividad, y dirijo a un especialista externo en redes.',
+    icon: 'handshake',
+  },
+  {
+    titulo: 'Pensamiento estratégico',
+    desc: 'Autor del Plan Estratégico de TI 2021–2026 de Sohipren, ejecutado año a año.',
+    icon: 'target',
+  },
+  {
+    titulo: 'Comunicación técnica',
+    desc: 'Documentación de procesos y definición de criterios claros para equipos externos.',
+    icon: 'message',
+  },
+  {
+    titulo: 'Resolución bajo presión',
+    desc: 'Continuidad operativa e incidentes de infraestructura crítica en una planta productiva.',
+    icon: 'bolt',
+  },
+  {
+    titulo: 'Criterio para priorizar',
+    desc: 'Soluciones deterministas primero, automatización e IA solo donde aportan valor real.',
+    icon: 'check',
+  },
+  {
+    titulo: 'Aprendizaje continuo',
+    desc: 'Ingeniería en Sistemas y Diplomatura en Gestión en curso, más formación constante en Platzi.',
+    icon: 'book',
   },
 ];
 
@@ -191,9 +241,11 @@ const casos = await Promise.all(
   latestPosts.map(async (post) => ({
     title: post.title,
     summary: post.excerpt,
-    category: typeof post.category === 'object' ? post.category?.title : post.category,
     href: getPermalink(post.permalink, 'post'),
     image: await findImage(post.image),
+    tags: post.tags ?? [],
+    highlights: post.highlights ?? [],
+    featured: post.featured ?? false,
   }))
 );
 ---
@@ -338,6 +390,7 @@ const casos = await Promise.all(
                   <div class="ml-tl-year">{t.year}</div>
                   <span class="ml-tl-badge">{t.status}</span>
                 </div>
+                <div class="ml-tl-eyebrow">Logros clave</div>
                 <ul class="ml-tl-list">
                   {t.items.map((it) => (
                     <li>
@@ -348,6 +401,13 @@ const casos = await Promise.all(
                     </li>
                   ))}
                 </ul>
+                {t.tags && t.tags.length > 0 && (
+                  <div class="ml-case-tags">
+                    {t.tags.map((tag) => (
+                      <span class="ml-case-tag">{tag}</span>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))
@@ -366,6 +426,7 @@ const casos = await Promise.all(
         {
           casos.map((c) => (
             <a class="ml-case-card" href={c.href}>
+              {c.featured && <span class="ml-case-badge">Destacado</span>}
               <div class="ml-case-img">
                 {c.image && (
                   <Image
@@ -383,9 +444,18 @@ const casos = await Promise.all(
               <div class="ml-case-body">
                 <h3>{c.title}</h3>
                 <p>{c.summary}</p>
-                {c.category && (
+                {c.highlights && c.highlights.length > 0 && (
+                  <ul class="ml-case-list">
+                    {c.highlights.map((h) => (
+                      <li>{h}</li>
+                    ))}
+                  </ul>
+                )}
+                {c.tags && c.tags.length > 0 && (
                   <div class="ml-case-tags">
-                    <span class="ml-case-tag">{c.category}</span>
+                    {c.tags.map((tag) => (
+                      <span class="ml-case-tag">{tag.title}</span>
+                    ))}
                   </div>
                 )}
               </div>
@@ -412,13 +482,89 @@ const casos = await Promise.all(
         {
           experiencia.map((e) => (
             <div class="ml-exp-row">
-              <div>
-                <h3>{e.empresa}</h3>
-                <div class="ml-exp-meta">
-                  {e.cargo} · {e.anios}
+              <div class="ml-exp-top">
+                <div>
+                  <h3>{e.empresa}</h3>
+                  <div class="ml-exp-meta">{e.cargo}</div>
                 </div>
+                <span class="ml-exp-period">{e.anios}</span>
               </div>
-              <p>{e.desc}</p>
+              <div class="ml-tl-eyebrow">Logros clave</div>
+              <ul class="ml-tl-list">
+                {e.logros.map((logro) => (
+                  <li>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M5 13l4 4L19 7" />
+                    </svg>
+                    {logro}
+                  </li>
+                ))}
+              </ul>
+              {e.tags && e.tags.length > 0 && (
+                <div class="ml-case-tags">
+                  {e.tags.map((tag) => (
+                    <span class="ml-case-tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="ml-section" id="habilidades">
+    <div class="ml-container">
+      <div class="ml-section-head">
+        <div class="ml-eyebrow">Habilidades blandas</div>
+        <h2 class="ml-section-title">Cómo trabajo</h2>
+      </div>
+      <div class="ml-grid-3 ml-reveal" data-ml-reveal>
+        {
+          habilidades.map((h) => (
+            <div class="ml-skill-chip">
+              <div class="ml-skill-icon">
+                {h.icon === 'handshake' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M8 12l3 3 6-6" />
+                    <path d="M3 10l4-4 4 2 4-2 4 4" />
+                    <path d="M3 10v4l4 4M21 10v4l-4 4" />
+                  </svg>
+                )}
+                {h.icon === 'target' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <circle cx="12" cy="12" r="9" />
+                    <circle cx="12" cy="12" r="5" />
+                    <circle cx="12" cy="12" r="1" />
+                  </svg>
+                )}
+                {h.icon === 'message' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M21 11.5a8.4 8.4 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.4 8.4 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+                  </svg>
+                )}
+                {h.icon === 'bolt' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M13 2L4.5 13.5H11L10.5 22 19.5 10.5H13L13 2z" />
+                  </svg>
+                )}
+                {h.icon === 'check' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M4 14l4 4L20 6" />
+                  </svg>
+                )}
+                {h.icon === 'book' && (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+                  </svg>
+                )}
+              </div>
+              <div>
+                <h3>{h.titulo}</h3>
+                <p>{h.desc}</p>
+              </div>
             </div>
           ))
         }
@@ -533,748 +679,3 @@ const casos = await Promise.all(
     revealEls.forEach((el) => el.classList.add('is-in'));
   }
 </script>
-
-<style>
-  .ml-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ml-lime);
-  }
-  .ml-eyebrow::before {
-    content: '';
-    width: 16px;
-    height: 1px;
-    background: currentColor;
-  }
-  .ml-container {
-    max-width: 1180px;
-    margin-inline: auto;
-    padding-inline: 40px;
-  }
-  @media (max-width: 600px) {
-    .ml-container {
-      padding-inline: 20px;
-    }
-  }
-  .ml-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 26px;
-    font-weight: 600;
-    font-size: 14px;
-    border-radius: 999px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition:
-      transform 0.15s ease,
-      opacity 0.15s ease;
-  }
-  .ml-btn:hover {
-    transform: translateY(-2px);
-  }
-  .ml-btn-solid {
-    background: var(--ml-lime);
-    color: var(--ml-lime-text);
-  }
-  .ml-btn-outline {
-    background: transparent;
-    color: var(--aw-color-text-default);
-    border-color: var(--ml-border-strong);
-  }
-  .ml-section {
-    padding-block: 96px;
-    border-bottom: 1px solid var(--ml-border);
-  }
-  @media (max-width: 900px) {
-    .ml-section {
-      padding-block: 64px;
-    }
-  }
-  .ml-section-head {
-    margin-bottom: 48px;
-    max-width: 720px;
-  }
-  h2.ml-section-title {
-    margin: 10px 0 0;
-    font-size: 38px;
-    font-weight: 700;
-    color: var(--aw-color-text-default);
-  }
-  @media (max-width: 600px) {
-    h2.ml-section-title {
-      font-size: 28px;
-    }
-  }
-  p.ml-lead {
-    margin: 16px 0 0;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--aw-color-text-muted);
-    max-width: 760px;
-  }
-
-  .ml-hero {
-    position: relative;
-    padding-top: 150px;
-    padding-bottom: 96px;
-    background-image: radial-gradient(var(--ml-dot) 1.5px, transparent 1.5px);
-    background-size: 28px 28px;
-    animation: ml-dot-drift 38s linear infinite;
-  }
-  @keyframes ml-dot-drift {
-    from {
-      background-position: 0 0;
-    }
-    to {
-      background-position: 28px 28px;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ml-hero {
-      animation: none;
-    }
-  }
-  .ml-hero-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: var(--aw-color-text-muted);
-    margin-bottom: 24px;
-  }
-  .ml-hero-greeting {
-    font-size: 16px;
-    color: var(--aw-color-text-muted);
-    margin-bottom: 4px;
-  }
-  .ml-hero h1 {
-    margin: 4px 0 8px;
-    font-size: 72px;
-    font-weight: 800;
-    line-height: 1.02;
-    color: var(--aw-color-text-default);
-  }
-  @media (max-width: 600px) {
-    .ml-hero h1 {
-      font-size: 44px;
-    }
-  }
-  .ml-role {
-    font-size: 19px;
-    font-weight: 600;
-    color: var(--ml-accent);
-    margin-bottom: 28px;
-    letter-spacing: 0.02em;
-  }
-  p.ml-sub {
-    font-size: 19px;
-    line-height: 1.6;
-    color: var(--aw-color-text-muted);
-    max-width: 640px;
-    margin: 0 0 40px;
-  }
-  .ml-hero-actions {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .ml-hero-in {
-    animation: ml-hero-up 0.7s ease both;
-  }
-  @keyframes ml-hero-up {
-    from {
-      opacity: 0;
-      transform: translateY(16px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ml-hero-in {
-      animation: none;
-    }
-  }
-  .ml-scroll-cue {
-    position: absolute;
-    left: 50%;
-    bottom: 28px;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--aw-color-text-muted);
-  }
-  .ml-scroll-cue svg {
-    animation: ml-scroll-bounce 1.8s ease-in-out infinite;
-  }
-  @keyframes ml-scroll-bounce {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(6px);
-    }
-  }
-  @media (max-width: 600px) {
-    .ml-scroll-cue {
-      display: none;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ml-scroll-cue svg {
-      animation: none;
-    }
-  }
-
-  .ml-stats {
-    padding-block: 56px 0;
-  }
-  .ml-stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--ml-border);
-    border: 1px solid var(--ml-border);
-    border-radius: 14px;
-    overflow: hidden;
-  }
-  @media (max-width: 900px) {
-    .ml-stats-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  .ml-stat {
-    background: var(--ml-bg-elev);
-    padding: 26px 24px;
-  }
-  .ml-stat-num {
-    font-size: 34px;
-    font-weight: 800;
-    line-height: 1;
-    margin-bottom: 8px;
-    color: var(--aw-color-text-default);
-  }
-  .ml-stat-label {
-    font-size: 13px;
-    color: var(--aw-color-text-muted);
-    line-height: 1.4;
-  }
-
-  .ml-grid-3 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  .ml-grid-6 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  @media (max-width: 900px) {
-    .ml-grid-3,
-    .ml-grid-6 {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (max-width: 600px) {
-    .ml-grid-3,
-    .ml-grid-6 {
-      grid-template-columns: 1fr;
-    }
-  }
-  .ml-card {
-    background: var(--ml-bg-elev);
-    border: 1px solid var(--ml-border);
-    border-radius: 14px;
-    padding: 30px;
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .ml-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--ml-lime);
-  }
-  .ml-card-icon {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-  .ml-card h3 {
-    font-size: 19px;
-    font-weight: 700;
-    margin: 0 0 12px;
-    color: var(--aw-color-text-default);
-  }
-  .ml-card p {
-    font-size: 15px;
-    line-height: 1.55;
-    color: var(--aw-color-text-muted);
-    margin: 0;
-  }
-
-  .ml-stack-filters {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-  }
-  .ml-stack-filter {
-    padding: 10px 18px;
-    border-radius: 999px;
-    border: 1px solid var(--ml-border-strong);
-    background: transparent;
-    color: var(--aw-color-text-muted);
-    font-family: inherit;
-    font-weight: 600;
-    font-size: 13px;
-    cursor: pointer;
-    transition:
-      background 0.2s ease,
-      color 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .ml-stack-filter.is-active {
-    background: var(--ml-lime);
-    color: var(--ml-lime-text);
-    border-color: var(--ml-lime);
-  }
-  .ml-stack-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-  @media (max-width: 900px) {
-    .ml-stack-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (max-width: 600px) {
-    .ml-stack-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  .ml-stack-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    background: var(--ml-bg-elev);
-    border: 1px solid var(--ml-border);
-    border-radius: 14px;
-    padding: 18px;
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .ml-stack-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--ml-lime);
-  }
-  .ml-stack-card.is-hidden {
-    display: none;
-  }
-  .ml-stack-badge {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: var(--ml-bg-elev-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 13px;
-    color: var(--ml-accent);
-    flex-shrink: 0;
-  }
-  .ml-stack-name {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--aw-color-text-default);
-  }
-  .ml-stack-cat {
-    font-size: 11px;
-    color: var(--aw-color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-top: 2px;
-  }
-
-  .ml-timeline {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding-left: 28px;
-    border-left: 2px solid var(--ml-border);
-  }
-  @media (max-width: 600px) {
-    .ml-timeline {
-      padding-left: 20px;
-    }
-  }
-  .ml-tl-row {
-    position: relative;
-  }
-  .ml-tl-dot {
-    position: absolute;
-    left: -42px;
-    top: 22px;
-    width: 26px;
-    height: 26px;
-    border-radius: 999px;
-    background: var(--ml-bg-elev);
-    border: 2px solid var(--ml-accent);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-weight: 800;
-    color: var(--ml-accent);
-  }
-  @media (max-width: 600px) {
-    .ml-tl-dot {
-      left: -34px;
-      width: 22px;
-      height: 22px;
-    }
-  }
-  .ml-tl-card {
-    background: var(--ml-bg-elev);
-    border: 1px solid var(--ml-border);
-    border-radius: 14px;
-    padding: 26px 28px;
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .ml-tl-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--ml-accent);
-  }
-  .ml-tl-card-top {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 18px;
-  }
-  .ml-tl-year {
-    font-size: 24px;
-    font-weight: 800;
-    color: var(--ml-accent);
-  }
-  .ml-tl-badge {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ml-accent);
-    border: 1px solid var(--ml-accent);
-    border-radius: 999px;
-    padding: 4px 12px;
-  }
-  .ml-tl-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .ml-tl-list li {
-    font-size: 15px;
-    color: var(--aw-color-text-muted);
-    padding-left: 26px;
-    position: relative;
-    line-height: 1.4;
-  }
-  .ml-tl-list li svg {
-    position: absolute;
-    left: 0;
-    top: 2px;
-    color: var(--ml-accent);
-  }
-
-  .ml-case-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-  }
-  @media (max-width: 900px) {
-    .ml-case-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (max-width: 600px) {
-    .ml-case-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  .ml-case-card {
-    display: flex;
-    flex-direction: column;
-    background: var(--ml-bg-elev);
-    border: 1px solid var(--ml-border);
-    border-radius: 14px;
-    overflow: hidden;
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .ml-case-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--ml-lime);
-  }
-  .ml-case-img {
-    height: 150px;
-    background: var(--ml-bg-elev-2);
-    border-bottom: 1px solid var(--ml-border);
-    overflow: hidden;
-  }
-  .ml-case-img :global(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .ml-case-body {
-    padding: 22px;
-  }
-  .ml-case-body h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin: 0 0 8px;
-    line-height: 1.3;
-    color: var(--aw-color-text-default);
-  }
-  .ml-case-body p {
-    font-size: 14px;
-    color: var(--aw-color-text-muted);
-    line-height: 1.5;
-    margin: 0;
-  }
-  .ml-case-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 14px;
-  }
-  .ml-case-tag {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--aw-color-text-muted);
-    border: 1px solid var(--ml-border);
-    border-radius: 999px;
-    padding: 4px 10px;
-  }
-  .ml-see-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 32px;
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--ml-lime);
-  }
-
-  .ml-exp-row {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 32px;
-    padding: 26px;
-    border: 1px solid var(--ml-border);
-    border-radius: 14px;
-    margin-bottom: 16px;
-    background: var(--ml-bg-elev);
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .ml-exp-row:hover {
-    transform: translateY(-3px);
-    border-color: var(--ml-lime);
-  }
-  @media (max-width: 700px) {
-    .ml-exp-row {
-      grid-template-columns: 1fr;
-    }
-  }
-  .ml-exp-row h3 {
-    font-size: 18px;
-    font-weight: 700;
-    margin: 0 0 4px;
-    color: var(--aw-color-text-default);
-  }
-  .ml-exp-meta {
-    font-size: 13px;
-    color: var(--ml-accent);
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-  .ml-exp-row p {
-    font-size: 15px;
-    color: var(--aw-color-text-muted);
-    line-height: 1.55;
-    margin: 0;
-  }
-
-  .ml-edu-card {
-    background: var(--ml-bg-elev);
-    border: 1px solid var(--ml-border);
-    border-radius: 14px;
-    padding: 24px;
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .ml-edu-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--ml-lime);
-  }
-  .ml-edu-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 16px;
-  }
-  .ml-edu-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    background: var(--ml-bg-elev-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ml-accent);
-    flex-shrink: 0;
-  }
-  .ml-edu-badge {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    border: 1px solid var(--ml-lime);
-    color: var(--ml-lime);
-    border-radius: 999px;
-    padding: 4px 10px;
-    white-space: nowrap;
-  }
-  .ml-edu-card h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin: 0 0 6px;
-    line-height: 1.3;
-    color: var(--aw-color-text-default);
-  }
-  .ml-edu-card p {
-    font-size: 13px;
-    color: var(--aw-color-text-muted);
-    margin: 0;
-  }
-
-  .ml-contact-box {
-    text-align: center;
-    padding-block: 40px;
-  }
-  .ml-contact-box h2 {
-    font-size: 46px;
-    font-weight: 800;
-    margin-bottom: 28px;
-    color: var(--aw-color-text-default);
-  }
-  @media (max-width: 600px) {
-    .ml-contact-box h2 {
-      font-size: 32px;
-    }
-  }
-  .ml-contact-cards {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .ml-contact-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 18px 26px;
-    background: var(--ml-bg-elev);
-    border: 1px solid var(--ml-border);
-    border-radius: 14px;
-    min-width: 230px;
-    text-align: left;
-    transition:
-      transform 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .ml-contact-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--ml-lime);
-  }
-  .ml-contact-card-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 999px;
-    background: var(--ml-bg-elev-2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--ml-lime);
-    flex-shrink: 0;
-  }
-  .ml-contact-card-text {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-  }
-  .ml-contact-card-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--aw-color-text-muted);
-  }
-  .ml-contact-card-value {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--aw-color-text-default);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .ml-reveal > :global(*) {
-    opacity: 0.5;
-    transform: translateY(18px);
-    transition:
-      opacity 0.55s ease,
-      transform 0.55s ease;
-  }
-  .ml-reveal.is-in > :global(*) {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ml-reveal > :global(*) {
-      opacity: 1;
-      transform: none;
-      transition: none;
-    }
-  }
-</style>

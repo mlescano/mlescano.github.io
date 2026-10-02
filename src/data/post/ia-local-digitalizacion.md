@@ -4,6 +4,11 @@ title: "IA Local: Prueba de Concepto con Ollama"
 excerpt: "Pruebas de concepto con modelos LLM locales para evaluar dónde la IA aporta valor real frente a una solución determinista."
 image: "~/assets/images/ia-local.png"
 category: Innovación
+tags: ["Ollama", "IA local"]
+highlights:
+  - "Pruebas de concepto con LLMs locales"
+  - "Sin depender de servicios en la nube"
+  - "Criterio: IA solo donde aporta valor"
 ---
 
 ### El Desafío

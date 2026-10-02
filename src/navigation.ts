@@ -7,6 +7,7 @@ export const headerData = {
     { text: 'Stack', href: '#stack' },
     { text: 'Trayectoria', href: '#evolucion' },
     { text: 'Proyectos', href: '#proyectos' },
+    { text: 'Habilidades', href: '#habilidades' },
   ],
   actions: [{ text: 'Contacto', href: '#contacto' }],
 };

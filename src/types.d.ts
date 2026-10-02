@@ -27,6 +27,10 @@ export interface Post {
   category?: Taxonomy;
   /**  */
   tags?: Taxonomy[];
+  /** Short bullet points for card/teaser display. */
+  highlights?: string[];
+  /** Marks this post as the flagship/featured case. */
+  featured?: boolean;
   /**  */
   author?: string;
 
