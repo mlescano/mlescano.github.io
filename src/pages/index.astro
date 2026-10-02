@@ -672,35 +672,52 @@ const casos = await Promise.all(
 </Layout>
 
 <script>
-  const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-ml-stack-filter]');
-  const stackCards = document.querySelectorAll<HTMLElement>('[data-ml-stack-card]');
+  function initStackFilter() {
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-ml-stack-filter]');
+    const stackCards = document.querySelectorAll<HTMLElement>('[data-ml-stack-card]');
 
-  filterButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const filter = btn.getAttribute('data-ml-stack-filter');
-      filterButtons.forEach((b) => b.classList.toggle('is-active', b === btn));
-      stackCards.forEach((card) => {
-        const cat = card.getAttribute('data-ml-cat');
-        card.classList.toggle('is-hidden', filter !== 'Todo' && cat !== filter);
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-ml-stack-filter');
+        filterButtons.forEach((b) => b.classList.toggle('is-active', b === btn));
+        stackCards.forEach((card) => {
+          const cat = card.getAttribute('data-ml-cat');
+          card.classList.toggle('is-hidden', filter !== 'Todo' && cat !== filter);
+        });
       });
     });
-  });
-
-  const revealEls = document.querySelectorAll<HTMLElement>('[data-ml-reveal]');
-  if ('IntersectionObserver' in window && revealEls.length) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-in');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    revealEls.forEach((el) => observer.observe(el));
-  } else {
-    revealEls.forEach((el) => el.classList.add('is-in'));
   }
+
+  function initReveal() {
+    const revealEls = document.querySelectorAll<HTMLElement>('[data-ml-reveal]');
+    if ('IntersectionObserver' in window && revealEls.length) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-in');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('is-in'));
+    }
+  }
+
+  // Re-run on every Astro view-transition navigation (not just the first load),
+  // and again if the page is restored from the back/forward cache, so cards
+  // don't stay stuck faded-out after navigating away and back.
+  document.addEventListener('astro:page-load', () => {
+    initStackFilter();
+    initReveal();
+  });
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      document.querySelectorAll<HTMLElement>('[data-ml-reveal]').forEach((el) => el.classList.add('is-in'));
+    }
+  });
 </script>
